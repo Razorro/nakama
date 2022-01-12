@@ -87,6 +87,7 @@ func NewRuntimeGoNakamaModule(logger *zap.Logger, db *sql.DB, protojsonMarshaler
 	}
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using an Apple sign in token.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param token(string) Apple sign in token.
@@ -116,6 +117,7 @@ func (n *RuntimeGoNakamaModule) AuthenticateApple(ctx context.Context, token, us
 	return AuthenticateApple(ctx, n.logger, n.db, n.socialClient, n.config.GetSocial().Apple.BundleId, token, username, create)
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using a custom authentication managed by an external service or source not already supported by Nakama.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param id(string) Custom ID to use to authenticate the user. Must be between 6-128 characters.
@@ -145,6 +147,7 @@ func (n *RuntimeGoNakamaModule) AuthenticateCustom(ctx context.Context, id, user
 	return AuthenticateCustom(ctx, n.logger, n.db, id, username, create)
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using a device identifier.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param id(string) Device ID to use to authenticate the user. Must be between 1-128 characters.
@@ -174,6 +177,7 @@ func (n *RuntimeGoNakamaModule) AuthenticateDevice(ctx context.Context, id, user
 	return AuthenticateDevice(ctx, n.logger, n.db, id, username, create)
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using an email address and password.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param email(string) Email address to use to authenticate the user. Must be between 10-255 characters.
@@ -224,6 +228,7 @@ func (n *RuntimeGoNakamaModule) AuthenticateEmail(ctx context.Context, email, pa
 	return AuthenticateEmail(ctx, n.logger, n.db, cleanEmail, password, username, create)
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using a Facebook account token.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param token(string) Facebook OAuth or Limited Login (JWT) access token.
@@ -256,6 +261,7 @@ func (n *RuntimeGoNakamaModule) AuthenticateFacebook(ctx context.Context, token 
 	return dbUserID, dbUsername, created, err
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using a Facebook Instant Game.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param playerInfo(string) Facebook Player info.
@@ -281,6 +287,7 @@ func (n *RuntimeGoNakamaModule) AuthenticateFacebookInstantGame(ctx context.Cont
 	return AuthenticateFacebookInstantGame(ctx, n.logger, n.db, n.socialClient, n.config.GetSocial().FacebookInstantGame.AppSecret, signedPlayerInfo, username, create)
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using Apple Game Center credentials.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param playerId(string) PlayerId provided by GameCenter.
@@ -326,6 +333,7 @@ func (n *RuntimeGoNakamaModule) AuthenticateGameCenter(ctx context.Context, play
 	return AuthenticateGameCenter(ctx, n.logger, n.db, n.socialClient, playerID, bundleID, timestamp, salt, signature, publicKeyUrl, username, create)
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using a Google ID token.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param token(string) Google OAuth access token.
@@ -351,6 +359,7 @@ func (n *RuntimeGoNakamaModule) AuthenticateGoogle(ctx context.Context, token, u
 	return AuthenticateGoogle(ctx, n.logger, n.db, n.socialClient, token, username, create)
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using a Steam account token.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param token(string) Steam token.
@@ -382,6 +391,7 @@ func (n *RuntimeGoNakamaModule) AuthenticateSteam(ctx context.Context, token, us
 	return userID, username, created, err
 }
 
+// @group authenticate
 // @summary Generate a Nakama session token from a user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) User ID to use to generate the token.
@@ -414,6 +424,7 @@ func (n *RuntimeGoNakamaModule) AuthenticateTokenGenerate(userID, username strin
 	return token, exp, nil
 }
 
+// @group accounts
 // @summary Fetch account information by user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) User ID to fetch information for. Must be valid UUID.
@@ -433,6 +444,7 @@ func (n *RuntimeGoNakamaModule) AccountGetId(ctx context.Context, userID string)
 	return account, nil
 }
 
+// @group accounts
 // @summary Fetch information for multiple accounts by user IDs.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userIds([]string) Array of user IDs to fetch information for. Must be valid UUID.
@@ -452,6 +464,7 @@ func (n *RuntimeGoNakamaModule) AccountsGetId(ctx context.Context, userIDs []str
 	return GetAccounts(ctx, n.logger, n.db, n.tracker, userIDs)
 }
 
+// @group accounts
 // @summary Update an account by user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) User ID for which the information is to be updated. Must be valid UUID.
@@ -511,6 +524,7 @@ func (n *RuntimeGoNakamaModule) AccountUpdateId(ctx context.Context, userID, use
 	}})
 }
 
+// @group accounts
 // @summary Delete an account by user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) User ID for the account to be deleted. Must be valid UUID.
@@ -525,6 +539,7 @@ func (n *RuntimeGoNakamaModule) AccountDeleteId(ctx context.Context, userID stri
 	return DeleteAccount(ctx, n.logger, n.db, u, recorded)
 }
 
+// @group accounts
 // @summary Export account information for a specified user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) User ID for the account to be exported. Must be valid UUID.
@@ -549,6 +564,7 @@ func (n *RuntimeGoNakamaModule) AccountExportId(ctx context.Context, userID stri
 	return string(exportBytes), nil
 }
 
+// @group users
 // @summary Fetch one or more users by ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userIds([]string) An array of user IDs to fetch.
@@ -573,6 +589,7 @@ func (n *RuntimeGoNakamaModule) UsersGetId(ctx context.Context, userIDs []string
 	return users.Users, nil
 }
 
+// @group users
 // @summary Fetch one or more users by username.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param usernames([]string) An array of usernames to fetch.
@@ -597,6 +614,7 @@ func (n *RuntimeGoNakamaModule) UsersGetUsername(ctx context.Context, usernames 
 	return users.Users, nil
 }
 
+// @group users
 // @summary Fetch one or more users randomly.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param count(int) The number of users to fetch.
@@ -614,6 +632,7 @@ func (n *RuntimeGoNakamaModule) UsersGetRandom(ctx context.Context, count int) (
 	return GetRandomUsers(ctx, n.logger, n.db, n.tracker, count)
 }
 
+// @group users
 // @summary Ban one or more users by ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userIds([]string) An array of user IDs to ban.
@@ -635,6 +654,7 @@ func (n *RuntimeGoNakamaModule) UsersBanId(ctx context.Context, userIDs []string
 	return BanUsers(ctx, n.logger, n.db, n.sessionCache, ids)
 }
 
+// @group users
 // @summary Unban one or more users by ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userIds([]string) An array of user IDs to unban.
@@ -656,6 +676,7 @@ func (n *RuntimeGoNakamaModule) UsersUnbanId(ctx context.Context, userIDs []stri
 	return UnbanUsers(ctx, n.logger, n.db, n.sessionCache, ids)
 }
 
+// @group authenticate
 // @summary Link Apple authentication to a user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID to be linked.
@@ -670,6 +691,7 @@ func (n *RuntimeGoNakamaModule) LinkApple(ctx context.Context, userID, token str
 	return LinkApple(ctx, n.logger, n.db, n.config, n.socialClient, id, token)
 }
 
+// @group authenticate
 // @summary Link custom authentication to a user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID to be linked.
@@ -684,6 +706,7 @@ func (n *RuntimeGoNakamaModule) LinkCustom(ctx context.Context, userID, customID
 	return LinkCustom(ctx, n.logger, n.db, id, customID)
 }
 
+// @group authenticate
 // @summary Link device authentication to a user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID to be linked.
@@ -698,6 +721,7 @@ func (n *RuntimeGoNakamaModule) LinkDevice(ctx context.Context, userID, deviceID
 	return LinkDevice(ctx, n.logger, n.db, id, deviceID)
 }
 
+// @group authenticate
 // @summary Link email authentication to a user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID to be linked.
@@ -713,6 +737,7 @@ func (n *RuntimeGoNakamaModule) LinkEmail(ctx context.Context, userID, email, pa
 	return LinkEmail(ctx, n.logger, n.db, id, email, password)
 }
 
+// @group authenticate
 // @summary Link Facebook authentication to a user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID to be linked.
@@ -729,6 +754,7 @@ func (n *RuntimeGoNakamaModule) LinkFacebook(ctx context.Context, userID, userna
 	return LinkFacebook(ctx, n.logger, n.db, n.socialClient, n.router, id, username, n.config.GetSocial().FacebookLimitedLogin.AppId, token, importFriends)
 }
 
+// @group authenticate
 // @summary Link Facebook Instant Game authentication to a user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID to be linked.
@@ -743,6 +769,7 @@ func (n *RuntimeGoNakamaModule) LinkFacebookInstantGame(ctx context.Context, use
 	return LinkFacebookInstantGame(ctx, n.logger, n.db, n.config, n.socialClient, id, signedPlayerInfo)
 }
 
+// @group authenticate
 // @summary Link Apple Game Center authentication to a user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID to be linked.
@@ -762,6 +789,7 @@ func (n *RuntimeGoNakamaModule) LinkGameCenter(ctx context.Context, userID, play
 	return LinkGameCenter(ctx, n.logger, n.db, n.socialClient, id, playerID, bundleID, timestamp, salt, signature, publicKeyUrl)
 }
 
+// @group authenticate
 // @summary Link Google authentication to a user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID to be linked.
@@ -776,6 +804,7 @@ func (n *RuntimeGoNakamaModule) LinkGoogle(ctx context.Context, userID, token st
 	return LinkGoogle(ctx, n.logger, n.db, n.socialClient, id, token)
 }
 
+// @group authenticate
 // @summary Link Steam authentication to a user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID to be linked.
@@ -792,6 +821,7 @@ func (n *RuntimeGoNakamaModule) LinkSteam(ctx context.Context, userID, username,
 	return LinkSteam(ctx, n.logger, n.db, n.config, n.socialClient, n.router, id, username, token, importFriends)
 }
 
+// @group utils
 // @summary Read file from user device.
 // @param relPath(string) Relative path to the file to be read.
 // @return fileRead(*os.File) The read file.
@@ -800,6 +830,7 @@ func (n *RuntimeGoNakamaModule) ReadFile(relPath string) (*os.File, error) {
 	return FileRead(n.config.GetRuntime().Path, relPath)
 }
 
+// @group authenticate
 // @summary Unlink Apple authentication from a user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID to be unlinked.
@@ -814,6 +845,7 @@ func (n *RuntimeGoNakamaModule) UnlinkApple(ctx context.Context, userID, token s
 	return UnlinkApple(ctx, n.logger, n.db, n.config, n.socialClient, id, token)
 }
 
+// @group authenticate
 // @summary Unlink custom authentication from a user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID to be unlinked.
@@ -828,6 +860,7 @@ func (n *RuntimeGoNakamaModule) UnlinkCustom(ctx context.Context, userID, custom
 	return UnlinkCustom(ctx, n.logger, n.db, id, customID)
 }
 
+// @group authenticate
 // @summary Unlink device authentication from a user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID to be unlinked.
@@ -842,6 +875,7 @@ func (n *RuntimeGoNakamaModule) UnlinkDevice(ctx context.Context, userID, device
 	return UnlinkDevice(ctx, n.logger, n.db, id, deviceID)
 }
 
+// @group authenticate
 // @summary Unlink email authentication from a user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID to be unlinked.
@@ -856,6 +890,7 @@ func (n *RuntimeGoNakamaModule) UnlinkEmail(ctx context.Context, userID, email s
 	return UnlinkEmail(ctx, n.logger, n.db, id, email)
 }
 
+// @group authenticate
 // @summary Unlink Facebook authentication from a user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID to be unlinked.
@@ -870,6 +905,7 @@ func (n *RuntimeGoNakamaModule) UnlinkFacebook(ctx context.Context, userID, toke
 	return UnlinkFacebook(ctx, n.logger, n.db, n.socialClient, n.config.GetSocial().FacebookLimitedLogin.AppId, id, token)
 }
 
+// @group authenticate
 // @summary Unlink Facebook Instant Game authentication from a user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID to be unlinked.
@@ -884,6 +920,7 @@ func (n *RuntimeGoNakamaModule) UnlinkFacebookInstantGame(ctx context.Context, u
 	return UnlinkFacebookInstantGame(ctx, n.logger, n.db, n.config, n.socialClient, id, signedPlayerInfo)
 }
 
+// @group authenticate
 // @summary Unlink Apple Game Center authentication from a user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID to be unlinked.
@@ -903,6 +940,7 @@ func (n *RuntimeGoNakamaModule) UnlinkGameCenter(ctx context.Context, userID, pl
 	return UnlinkGameCenter(ctx, n.logger, n.db, n.socialClient, id, playerID, bundleID, timestamp, salt, signature, publicKeyUrl)
 }
 
+// @group authenticate
 // @summary Unlink Google authentication from a user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID to be unlinked.
@@ -917,6 +955,7 @@ func (n *RuntimeGoNakamaModule) UnlinkGoogle(ctx context.Context, userID, token 
 	return UnlinkGoogle(ctx, n.logger, n.db, n.socialClient, id, token)
 }
 
+// @group authenticate
 // @summary Unlink Steam authentication from a user ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID to be unlinked.
@@ -931,6 +970,7 @@ func (n *RuntimeGoNakamaModule) UnlinkSteam(ctx context.Context, userID, token s
 	return UnlinkSteam(ctx, n.logger, n.db, n.config, n.socialClient, id, token)
 }
 
+// @group streams
 // @summary List all users currently online and connected to a stream.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param subject(string) The primary stream subject, typically a user ID.
@@ -967,6 +1007,7 @@ func (n *RuntimeGoNakamaModule) StreamUserList(mode uint8, subject, subcontext, 
 	return runtimePresences, nil
 }
 
+// @group streams
 // @summary Retreive a stream presence and metadata by user ID.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param subject(string) The primary stream subject, typically a user ID.
@@ -1010,6 +1051,7 @@ func (n *RuntimeGoNakamaModule) StreamUserGet(mode uint8, subject, subcontext, l
 	return nil, nil
 }
 
+// @group streams
 // @summary Add a user to a stream.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param subject(string) The primary stream subject, typically a user ID.
@@ -1061,6 +1103,7 @@ func (n *RuntimeGoNakamaModule) StreamUserJoin(mode uint8, subject, subcontext, 
 	return newlyTracked, nil
 }
 
+// @group streams
 // @summary Update a stream user by ID.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param subject(string) The primary stream subject, typically a user ID.
@@ -1111,6 +1154,7 @@ func (n *RuntimeGoNakamaModule) StreamUserUpdate(mode uint8, subject, subcontext
 	return nil
 }
 
+// @group streams
 // @summary Remove a user from a stream.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param subject(string) The primary stream subject, typically a user ID.
@@ -1150,6 +1194,7 @@ func (n *RuntimeGoNakamaModule) StreamUserLeave(mode uint8, subject, subcontext,
 	return n.streamManager.UserLeave(stream, uid, sid)
 }
 
+// @group streams
 // @summary Kick a user from a stream.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param subject(string) The primary stream subject, typically a user ID.
@@ -1188,6 +1233,7 @@ func (n *RuntimeGoNakamaModule) StreamUserKick(mode uint8, subject, subcontext, 
 	return n.streamManager.UserLeave(stream, uid, sid)
 }
 
+// @group streams
 // @summary Get a count of stream presences.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param subject(string) The primary stream subject, typically a user ID.
@@ -1217,6 +1263,7 @@ func (n *RuntimeGoNakamaModule) StreamCount(mode uint8, subject, subcontext, lab
 	return n.tracker.CountByStream(stream), nil
 }
 
+// @group streams
 // @summary Close a stream and remove all presences on it.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param subject(string) The primary stream subject, typically a user ID.
@@ -1247,6 +1294,7 @@ func (n *RuntimeGoNakamaModule) StreamClose(mode uint8, subject, subcontext, lab
 	return nil
 }
 
+// @group streams
 // @summary Send data to presences on a stream.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param subject(string) The primary stream subject, typically a user ID.
@@ -1323,6 +1371,7 @@ func (n *RuntimeGoNakamaModule) StreamSend(mode uint8, subject, subcontext, labe
 	return nil
 }
 
+// @group streams
 // @summary Send a message to presences on a stream.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param subject(string) The primary stream subject, typically a user ID.
@@ -1385,6 +1434,7 @@ func (n *RuntimeGoNakamaModule) StreamSendRaw(mode uint8, subject, subcontext, l
 	return nil
 }
 
+// @group sessions
 // @summary Disconnect a session.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param sessionId(string) The ID of the session to be disconnected.
@@ -1399,6 +1449,7 @@ func (n *RuntimeGoNakamaModule) SessionDisconnect(ctx context.Context, sessionID
 	return n.sessionRegistry.Disconnect(ctx, sid, reason...)
 }
 
+// @group sessions
 // @summary Log out a user from their current session.
 // @param userId(string) The ID of the user to be logged out.
 // @param token(string) The current session authentication token.
@@ -1413,6 +1464,7 @@ func (n *RuntimeGoNakamaModule) SessionLogout(userID, token, refreshToken string
 	return SessionLogout(n.config, n.sessionCache, uid, token, refreshToken)
 }
 
+// @group matches
 // @summary Create a new authoritative realtime multiplayer match running on the given runtime module name. The given params are passed to the match's init hook.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param module(string) The name of an available runtime module that will be responsible for the match. This was registered in InitModule.
@@ -1431,6 +1483,7 @@ func (n *RuntimeGoNakamaModule) MatchCreate(ctx context.Context, module string, 
 	return n.matchRegistry.CreateMatch(ctx, n.logger, fn, module, params)
 }
 
+// @group matches
 // @summary Get information on a running match.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param id(string) The ID of the match to fetch.
@@ -1440,6 +1493,7 @@ func (n *RuntimeGoNakamaModule) MatchGet(ctx context.Context, id string) (*api.M
 	return n.matchRegistry.GetMatch(ctx, id)
 }
 
+// @group matches
 // @summary List currently running realtime multiplayer matches and optionally filter them by authoritative mode, label, and current participant count.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param limit(int) The maximum number of matches to list. Default 1.
@@ -1472,6 +1526,7 @@ func (n *RuntimeGoNakamaModule) MatchList(ctx context.Context, limit int, author
 	return n.matchRegistry.ListMatches(ctx, limit, authoritativeWrapper, labelWrapper, minSizeWrapper, maxSizeWrapper, queryWrapper)
 }
 
+// @group matches
 // @summary Allow the match handler to be sent a reservation signal to mark a user ID or session ID into the match state ahead of their join attempt and eventual join flow. Called when the match handler receives a runtime signal.
 // @param ctx(context.Context) Context object represents information about the match and server for information purposes.
 // @param id(string) The user ID or session ID to send a reservation signal for.
@@ -1483,6 +1538,7 @@ func (n *RuntimeGoNakamaModule) MatchSignal(ctx context.Context, id string, data
 	return n.matchRegistry.Signal(ctx, id, data)
 }
 
+// @group notifications
 // @summary Send one in-app notification to a user.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID of the user to be sent the notification.
@@ -1537,6 +1593,7 @@ func (n *RuntimeGoNakamaModule) NotificationSend(ctx context.Context, userID, su
 	return NotificationSend(ctx, n.logger, n.db, n.router, notifications)
 }
 
+// @group notifications
 // @summary Send one or more in-app notifications to a user.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param notifications([]*runtime.NotificationsSend) A list of notifications to be sent together.
@@ -1592,6 +1649,7 @@ func (n *RuntimeGoNakamaModule) NotificationsSend(ctx context.Context, notificat
 	return NotificationSend(ctx, n.logger, n.db, n.router, ns)
 }
 
+// @group wallets
 // @summary Update a user's wallet with the given changeset.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The ID of the user whose wallet to update.
@@ -1633,6 +1691,7 @@ func (n *RuntimeGoNakamaModule) WalletUpdate(ctx context.Context, userID string,
 	return results[0].Updated, results[0].Previous, nil
 }
 
+// @group wallets
 // @summary Update one or more user wallets with individual changesets. This function will also insert a new wallet ledger item into each user's wallet history that tracks their update.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param updates([]*runtime.WalletUpdate) The set of user wallet update operations to apply.
@@ -1671,6 +1730,7 @@ func (n *RuntimeGoNakamaModule) WalletsUpdate(ctx context.Context, updates []*ru
 	return UpdateWallets(ctx, n.logger, n.db, walletUpdates, updateLedger)
 }
 
+// @group wallets
 // @summary Update the metadata for a particular wallet update in a user's wallet ledger history. Useful when adding a note to a transaction for example.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param itemId(string) The ID of the wallet ledger item to update.
@@ -1691,6 +1751,7 @@ func (n *RuntimeGoNakamaModule) WalletLedgerUpdate(ctx context.Context, itemID s
 	return UpdateWalletLedger(ctx, n.logger, n.db, id, string(metadataBytes))
 }
 
+// @group wallets
 // @summary List all wallet updates for a particular user from oldest to newest.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The ID of the user to list wallet updates for.
@@ -1720,6 +1781,7 @@ func (n *RuntimeGoNakamaModule) WalletLedgerList(ctx context.Context, userID str
 	return runtimeItems, newCursor, nil
 }
 
+// @group storage
 // @summary List records in a collection and page through results. The records returned can be filtered to those owned by the user or "" for public records.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) User ID to list records for or "" (empty string) for public records.
@@ -1747,6 +1809,7 @@ func (n *RuntimeGoNakamaModule) StorageList(ctx context.Context, userID, collect
 	return objectList.Objects, objectList.Cursor, nil
 }
 
+// @group storage
 // @summary Fetch one or more records by their bucket/collection/keyname and optional user.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param objectIds([]*runtime.StorageReads) An array of object identifiers to be fetched.
@@ -1790,6 +1853,7 @@ func (n *RuntimeGoNakamaModule) StorageRead(ctx context.Context, reads []*runtim
 	return objects.Objects, nil
 }
 
+// @group storage
 // @summary Write one or more objects by their collection/keyname and optional user.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param objectIds([]*runtime.StorageWrite) An array of object identifiers to be written.
@@ -1846,6 +1910,7 @@ func (n *RuntimeGoNakamaModule) StorageWrite(ctx context.Context, writes []*runt
 	return acks.Acks, nil
 }
 
+// @group storage
 // @summary Remove one or more objects by their collection/keyname and optional user.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param objectIds([]*runtime.StorageDelete) An array of object identifiers to be deleted.
@@ -2015,6 +2080,7 @@ func (n *RuntimeGoNakamaModule) MultiUpdate(ctx context.Context, accountUpdates 
 	return MultiUpdate(ctx, n.logger, n.db, accountUpdateOps, storageWriteOps, walletUpdateOps, updateLedger)
 }
 
+// @group leaderboards
 // @summary Setup a new dynamic leaderboard with the specified ID and various configuration settings. The leaderboard will be created if it doesn't already exist, otherwise its configuration will not be updated.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param id(string) The unique identifier for the new leaderboard. This is used by clients to submit scores.
@@ -2078,6 +2144,7 @@ func (n *RuntimeGoNakamaModule) LeaderboardCreate(ctx context.Context, id string
 	return nil
 }
 
+// @group leaderboards
 // @summary Delete a leaderboard and all scores that belong to it.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param id(string) The unique identifier for the leaderboard to delete.
@@ -2090,6 +2157,7 @@ func (n *RuntimeGoNakamaModule) LeaderboardDelete(ctx context.Context, id string
 	return n.leaderboardCache.Delete(ctx, id)
 }
 
+// @group leaderboards
 // @summary Find leaderboards which have been created on the server. Leaderboards can be filtered with categories.
 // @param categoryStart(int) Filter leaderboards with categories greater or equal than this value.
 // @param categoryEnd(int) Filter leaderboards with categories equal or less than this value.
@@ -2124,6 +2192,7 @@ func (n *RuntimeGoNakamaModule) LeaderboardList(categoryStart, categoryEnd, limi
 	return LeaderboardList(n.logger, n.leaderboardCache, categoryStart, categoryEnd, limit, cursorPtr)
 }
 
+// @group leaderboards
 // @summary List records on the specified leaderboard, optionally filtering to only a subset of records by their owners. Records will be listed in the preconfigured leaderboard sort order.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param id(string) The unique identifier for the leaderboard to list. Mandatory field.
@@ -2165,6 +2234,7 @@ func (n *RuntimeGoNakamaModule) LeaderboardRecordsList(ctx context.Context, id s
 	return list.Records, list.OwnerRecords, list.NextCursor, list.PrevCursor, nil
 }
 
+// @group leaderboards
 // @summary Use the preconfigured operator for the given leaderboard to submit a score for a particular user.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param id(string) The unique identifier for the leaderboard to submit to.
@@ -2213,6 +2283,7 @@ func (n *RuntimeGoNakamaModule) LeaderboardRecordWrite(ctx context.Context, id, 
 	return LeaderboardRecordWrite(ctx, n.logger, n.db, n.leaderboardCache, n.leaderboardRankCache, uuid.Nil, id, ownerID, username, score, subscore, metadataStr, operator)
 }
 
+// @group leaderboards
 // @summary Remove an owner's record from a leaderboard, if one exists.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param id(string) The unique identifier for the leaderboard to delete from.
@@ -2230,6 +2301,7 @@ func (n *RuntimeGoNakamaModule) LeaderboardRecordDelete(ctx context.Context, id,
 	return LeaderboardRecordDelete(ctx, n.logger, n.db, n.leaderboardCache, n.leaderboardRankCache, uuid.Nil, id, ownerID)
 }
 
+// @group leaderboards
 // @summary Fetch one or more leaderboards by ID.
 // @param ids([]string) The table array of leaderboard ids.
 // @return leaderboardsGet(*api.Leaderboard) The leaderboard records according to ID.
@@ -2238,6 +2310,7 @@ func (n *RuntimeGoNakamaModule) LeaderboardsGetId(ctx context.Context, IDs []str
 	return LeaderboardsGet(n.leaderboardCache, IDs), nil
 }
 
+// @group tournaments
 // @summary Setup a new dynamic tournament with the specified ID and various configuration settings. The underlying leaderboard will be created if it doesn't already exist, otherwise its configuration will not be updated.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param id(string) The unique identifier for the new tournament. This is used by clients to submit scores.
@@ -2325,6 +2398,7 @@ func (n *RuntimeGoNakamaModule) TournamentCreate(ctx context.Context, id string,
 	return TournamentCreate(ctx, n.logger, n.leaderboardCache, n.leaderboardScheduler, id, authoritative, sort, oper, resetSchedule, metadataStr, title, description, category, startTime, endTime, duration, maxSize, maxNumScore, joinRequired)
 }
 
+// @group tournaments
 // @summary Delete a tournament and all records that belong to it.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param id(string) The unique identifier for the tournament to delete.
@@ -2337,6 +2411,7 @@ func (n *RuntimeGoNakamaModule) TournamentDelete(ctx context.Context, id string)
 	return TournamentDelete(ctx, n.leaderboardCache, n.leaderboardRankCache, n.leaderboardScheduler, id)
 }
 
+// @group tournaments
 // @summary Add additional score attempts to the owner's tournament record. This overrides the max number of score attempts allowed in the tournament for this specific owner.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param id(string) The unique identifier for the tournament to update.
@@ -2361,6 +2436,7 @@ func (n *RuntimeGoNakamaModule) TournamentAddAttempt(ctx context.Context, id, ow
 	return TournamentAddAttempt(ctx, n.logger, n.db, n.leaderboardCache, id, ownerID, count)
 }
 
+// @group tournaments
 // @summary A tournament may need to be joined before the owner can submit scores. This operation is idempotent and will always succeed for the owner even if they have already joined the tournament.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param id(string) The unique identifier for the tournament to join.
@@ -2385,6 +2461,7 @@ func (n *RuntimeGoNakamaModule) TournamentJoin(ctx context.Context, id, ownerID,
 	return TournamentJoin(ctx, n.logger, n.db, n.leaderboardCache, ownerID, username, id)
 }
 
+// @group tournaments
 // @summary Fetch one or more tournaments by ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param ids([]string) The table array of tournament ids.
@@ -2398,6 +2475,7 @@ func (n *RuntimeGoNakamaModule) TournamentsGetId(ctx context.Context, tournament
 	return TournamentsGet(ctx, n.logger, n.db, tournamentIDs)
 }
 
+// @group tournaments
 // @summary Find tournaments which have been created on the server. Tournaments can be filtered with categories and via start and end times.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param categoryStart(int) Filter tournament with categories greater or equal than this value.
@@ -2444,6 +2522,7 @@ func (n *RuntimeGoNakamaModule) TournamentList(ctx context.Context, categoryStar
 	return TournamentList(ctx, n.logger, n.db, n.leaderboardCache, categoryStart, categoryEnd, startTime, endTime, limit, cursorPtr)
 }
 
+// @group tournaments
 // @summary List records on the specified tournament, optionally filtering to only a subset of records by their owners. Records will be listed in the preconfigured tournament sort order.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param tournamentId(string) The ID of the tournament to list records for.
@@ -2484,6 +2563,7 @@ func (n *RuntimeGoNakamaModule) TournamentRecordsList(ctx context.Context, tourn
 	return records.Records, records.OwnerRecords, records.PrevCursor, records.NextCursor, nil
 }
 
+// @group tournaments
 // @summary Submit a score and optional subscore to a tournament leaderboard. If the tournament has been configured with join required this will fail unless the owner has already joined the tournament.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param id(string) The unique identifier for the tournament leaderboard to submit to.
@@ -2526,6 +2606,7 @@ func (n *RuntimeGoNakamaModule) TournamentRecordWrite(ctx context.Context, id, o
 	return TournamentRecordWrite(ctx, n.logger, n.db, n.leaderboardCache, n.leaderboardRankCache, uuid.Nil, id, owner, username, score, subscore, metadataStr, operator)
 }
 
+// @group tournaments
 // @summary Fetch the list of tournament records around the owner.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param id(string) The ID of the tournament to list records for.
@@ -2555,6 +2636,7 @@ func (n *RuntimeGoNakamaModule) TournamentRecordsHaystack(ctx context.Context, i
 	return TournamentRecordsHaystack(ctx, n.logger, n.db, n.leaderboardCache, n.leaderboardRankCache, id, owner, limit, expiry)
 }
 
+// @group purchases
 // @summary Validates and stores the purchases present in an Apple App Store Receipt.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID of the owner of the receipt.
@@ -2590,6 +2672,7 @@ func (n *RuntimeGoNakamaModule) PurchaseValidateApple(ctx context.Context, userI
 	return validation, nil
 }
 
+// @group purchases
 // @summary Validates and stores a purchase receipt from the Google Play Store.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID of the owner of the receipt.
@@ -2618,6 +2701,7 @@ func (n *RuntimeGoNakamaModule) PurchaseValidateGoogle(ctx context.Context, user
 	return validation, nil
 }
 
+// @group purchases
 // @summary Validates and stores a purchase receipt from the Huawei App Gallery.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The user ID of the owner of the receipt.
@@ -2653,6 +2737,7 @@ func (n *RuntimeGoNakamaModule) PurchaseValidateHuawei(ctx context.Context, user
 	return validation, nil
 }
 
+// @group purchases
 // @summary List stored validated purchase receipts.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) Filter by user ID. Can be an empty string to list purchases for all users.
@@ -2674,6 +2759,7 @@ func (n *RuntimeGoNakamaModule) PurchasesList(ctx context.Context, userID string
 	return ListPurchases(ctx, n.logger, n.db, userID, limit, cursor)
 }
 
+// @group purchases
 // @summary Look up a purchase receipt by transaction ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param transactionId(string) Transaction ID of the purchase to look up.
@@ -2688,6 +2774,7 @@ func (n *RuntimeGoNakamaModule) PurchaseGetByTransactionId(ctx context.Context, 
 	return GetPurchaseByTransactionID(ctx, n.logger, n.db, transactionID)
 }
 
+// @group groups
 // @summary Fetch one or more groups by their ID.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param groupIds([]string) An array of strings of the IDs for the groups to get.
@@ -2707,6 +2794,7 @@ func (n *RuntimeGoNakamaModule) GroupsGetId(ctx context.Context, groupIDs []stri
 	return GetGroups(ctx, n.logger, n.db, groupIDs)
 }
 
+// @group groups
 // @summary Setup a group with various configuration settings. The group will be created if they don't exist or fail if the group name is taken.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) Mandatory. The user ID to be associated as the group superadmin.
@@ -2754,6 +2842,7 @@ func (n *RuntimeGoNakamaModule) GroupCreate(ctx context.Context, userID, name, c
 	return CreateGroup(ctx, n.logger, n.db, uid, cid, name, langTag, description, avatarUrl, metadataStr, open, maxCount)
 }
 
+// @group groups
 // @summary Update a group with various configuration settings. The group which is updated can change some or all of its fields.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param groupId(string) The ID of the group to update.
@@ -2821,6 +2910,7 @@ func (n *RuntimeGoNakamaModule) GroupUpdate(ctx context.Context, id, name, creat
 	return UpdateGroup(ctx, n.logger, n.db, groupID, uuid.Nil, creator, nameWrapper, langTagWrapper, descriptionWrapper, avatarURLWrapper, metadataWrapper, openWrapper, maxCountValue)
 }
 
+// @group groups
 // @summary Delete a group.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param groupId(string) The ID of the group to delete.
@@ -2834,6 +2924,7 @@ func (n *RuntimeGoNakamaModule) GroupDelete(ctx context.Context, id string) erro
 	return DeleteGroup(ctx, n.logger, n.db, groupID, uuid.Nil)
 }
 
+// @group groups
 // @summary Join a group for a particular user.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param groupId(string) The ID of the group to join.
@@ -2858,6 +2949,7 @@ func (n *RuntimeGoNakamaModule) GroupUserJoin(ctx context.Context, groupID, user
 	return JoinGroup(ctx, n.logger, n.db, n.router, group, user, username)
 }
 
+// @group groups
 // @summary Leave a group for a particular user.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param groupId(string) The ID of the group to leave.
@@ -2882,6 +2974,7 @@ func (n *RuntimeGoNakamaModule) GroupUserLeave(ctx context.Context, groupID, use
 	return LeaveGroup(ctx, n.logger, n.db, n.router, group, user, username)
 }
 
+// @group groups
 // @summary Add users to a group.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param groupId(string) The ID of the group to add users to.
@@ -2920,6 +3013,7 @@ func (n *RuntimeGoNakamaModule) GroupUsersAdd(ctx context.Context, callerID, gro
 	return AddGroupUsers(ctx, n.logger, n.db, n.router, caller, group, users)
 }
 
+// @group groups
 // @summary Kick users from a group.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param groupId(string) The ID of the group to kick users from.
@@ -2958,6 +3052,7 @@ func (n *RuntimeGoNakamaModule) GroupUsersKick(ctx context.Context, callerID, gr
 	return KickGroupUsers(ctx, n.logger, n.db, n.router, caller, group, users)
 }
 
+// @group groups
 // @summary Promote users in a group.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param groupId(string) The ID of the group whose members are being promoted.
@@ -2996,6 +3091,7 @@ func (n *RuntimeGoNakamaModule) GroupUsersPromote(ctx context.Context, callerID,
 	return PromoteGroupUsers(ctx, n.logger, n.db, n.router, caller, group, users)
 }
 
+// @group groups
 // @summary Demote users in a group.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param groupId(string) The ID of the group whose members are being demoted.
@@ -3034,6 +3130,7 @@ func (n *RuntimeGoNakamaModule) GroupUsersDemote(ctx context.Context, callerID, 
 	return DemoteGroupUsers(ctx, n.logger, n.db, n.router, caller, group, users)
 }
 
+// @group groups
 // @summary List all members, admins and superadmins which belong to a group. This also list incoming join requests.	ctx
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param groupId(string) The ID of the group to list members for.
@@ -3066,6 +3163,7 @@ func (n *RuntimeGoNakamaModule) GroupUsersList(ctx context.Context, id string, l
 	return users.GroupUsers, users.Cursor, nil
 }
 
+// @group groups
 // @summary Find groups based on the entered criteria.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param name(string) Search for groups that contain this value in their name.
@@ -3099,6 +3197,7 @@ func (n *RuntimeGoNakamaModule) GroupsList(ctx context.Context, name, langTag st
 	return groups.Groups, groups.Cursor, nil
 }
 
+// @group groups
 // @summary List all groups which a user belongs to and whether they've been accepted or if it's an invite.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The ID of the user to list groups for.
@@ -3154,6 +3253,7 @@ func (n *RuntimeGoNakamaModule) Event(ctx context.Context, evt *api.Event) error
 	return nil
 }
 
+// @group metrics
 // @summary Add a custom metrics counter.
 // @param name(string) The name of the custom metrics counter.
 // @param tags(map[string]string) The metrics tags associated with this counter.
@@ -3162,6 +3262,7 @@ func (n *RuntimeGoNakamaModule) MetricsCounterAdd(name string, tags map[string]s
 	n.metrics.CustomCounter(name, tags, delta)
 }
 
+// @group metrics
 // @summary Add a custom metrics gauge.
 // @param name(string) The name of the custom metrics gauge.
 // @param tags(map[string]string) The metrics tags associated with this gauge.
@@ -3170,6 +3271,7 @@ func (n *RuntimeGoNakamaModule) MetricsGaugeSet(name string, tags map[string]str
 	n.metrics.CustomGauge(name, tags, value)
 }
 
+// @group metrics
 // @summary Add a custom metrics timer.
 // @param name(string) The name of the custom metrics timer.
 // @param tags(map[string]string) The metrics tags associated with this timer.
@@ -3178,6 +3280,7 @@ func (n *RuntimeGoNakamaModule) MetricsTimerRecord(name string, tags map[string]
 	n.metrics.CustomTimer(name, tags, value)
 }
 
+// @group friends
 // @summary List all friends, invites, invited, and blocked which belong to a user.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param userId(string) The ID of the user who's friends, invites, invited, and blocked you want to list.
@@ -3220,7 +3323,8 @@ func (n *RuntimeGoNakamaModule) SetEventFn(fn RuntimeEventCustomFunction) {
 	n.Unlock()
 }
 
-// @summary Register a function that processes events published to the server.
+// @group chat
+// @summary Send a message on a realtime chat channel.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param channelId(string) The ID of the channel to send the message on.
 // @param content(map[string]interface{}) Message content. Must be set.
@@ -3247,6 +3351,7 @@ func (n *RuntimeGoNakamaModule) ChannelMessageSend(ctx context.Context, channelI
 	return ChannelMessageSend(ctx, n.logger, n.db, n.router, channelIdToStreamResult.Stream, channelId, contentStr, senderId, senderUsername, persist)
 }
 
+// @group chat
 // @summary Update a message on a realtime chat channel.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param channelId(string) The ID of the channel to send the message on.
@@ -3275,6 +3380,7 @@ func (n *RuntimeGoNakamaModule) ChannelMessageUpdate(ctx context.Context, channe
 	return ChannelMessageUpdate(ctx, n.logger, n.db, n.router, channelIdToStreamResult.Stream, channelId, messageId, contentStr, senderId, senderUsername, persist)
 }
 
+// @group chat
 // @summary Create a channel identifier to be used in other runtime calls. Does not create a channel.
 // @param ctx(context.Context) The context object represents information about the server and requester.
 // @param target(string) Can be the room name, group identifier, or another username.
