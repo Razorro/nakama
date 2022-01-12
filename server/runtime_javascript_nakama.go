@@ -324,6 +324,7 @@ func (n *runtimeJavascriptNakamaModule) event(r *goja.Runtime) func(goja.Functio
 	}
 }
 
+// @group utils
 // @summary Generate a version 4 UUID in the standard 36-character string representation.
 // @return uuid(string) The newly generated version 4 UUID identifier string.
 // @return error(error) An optional error value if an error occurred.
@@ -333,6 +334,7 @@ func (n *runtimeJavascriptNakamaModule) uuidV4(r *goja.Runtime) func(goja.Functi
 	}
 }
 
+// @group utils
 // @summary Parses a CRON expression and a timestamp in UTC seconds, and returns the next matching timestamp in UTC seconds.
 // @param expression(string) A valid CRON expression in standard format, for example "0 0 * * *" (meaning at midnight).
 // @param timestamp(number) A time value expressed as UTC seconds.
@@ -356,6 +358,7 @@ func (n *runtimeJavascriptNakamaModule) cronNext(r *goja.Runtime) func(goja.Func
 	}
 }
 
+// @group utils
 // @summary Execute an arbitrary SQL query and return the number of rows affected. Typically an "INSERT", "DELETE", or "UPDATE" statement with no return columns.
 // @param query(string) A SQL query to execute.
 // @param parameters(any[]) Arbitrary parameters to pass to placeholders in the query.
@@ -396,6 +399,7 @@ func (n *runtimeJavascriptNakamaModule) sqlExec(r *goja.Runtime) func(goja.Funct
 	}
 }
 
+// @group utils
 // @summary Execute an arbitrary SQL query that is expected to return row data. Typically a "SELECT" statement.
 // @param query(string) A SQL query to execute.
 // @param parameters(any[]) Arbitrary parameters to pass to placeholders in the query.
@@ -464,6 +468,7 @@ func (n *runtimeJavascriptNakamaModule) sqlQuery(r *goja.Runtime) func(goja.Func
 	}
 }
 
+// @group utils
 // @summary Send a HTTP request that returns a data type containing the result of the HTTP response.
 // @param url(string) The URL of the web resource to request.
 // @param method(string) The HTTP method verb used with the request.
@@ -543,6 +548,7 @@ func (n *runtimeJavascriptNakamaModule) httpRequest(r *goja.Runtime) func(goja.F
 	}
 }
 
+// @group utils
 // @summary Base64 encode a string input.
 // @param input(string) The string which will be base64 encoded.
 // @return out(string) Encoded string.
@@ -565,6 +571,7 @@ func (n *runtimeJavascriptNakamaModule) base64Encode(r *goja.Runtime) func(goja.
 	}
 }
 
+// @group utils
 // @summary Decode a base64 encoded string.
 // @param input(string) The string which will be base64 decoded.
 // @return out(string) Decoded string.
@@ -592,6 +599,7 @@ func (n *runtimeJavascriptNakamaModule) base64Decode(r *goja.Runtime) func(goja.
 	}
 }
 
+// @group utils
 // @summary Base64 URL encode a string input.
 // @param input(string) The string which will be base64 URL encoded.
 // @return out(string) Encoded string.
@@ -614,6 +622,7 @@ func (n *runtimeJavascriptNakamaModule) base64UrlEncode(r *goja.Runtime) func(go
 	}
 }
 
+// @group utils
 // @summary Decode a base64 URL encoded string.
 // @param input(string) The string to be decoded.
 // @return out(string) Decoded string.
@@ -641,6 +650,7 @@ func (n *runtimeJavascriptNakamaModule) base64UrlDecode(r *goja.Runtime) func(go
 	}
 }
 
+// @group utils
 // @summary base16 encode a string input.
 // @param input(string) The string to be encoded.
 // @return out(string) Encoded string.
@@ -654,6 +664,7 @@ func (n *runtimeJavascriptNakamaModule) base16Encode(r *goja.Runtime) func(goja.
 	}
 }
 
+// @group utils
 // @summary Decode a base16 encoded string.
 // @param input(string) The string to be decoded.
 // @return out(string) Decoded string.
@@ -670,6 +681,7 @@ func (n *runtimeJavascriptNakamaModule) base16Decode(r *goja.Runtime) func(goja.
 	}
 }
 
+// @group utils
 // @summary Generate a JSON Web Token.
 // @param signingMethod(string) The signing method to be used, either HS256 or RS256.
 // @param claims([]string) The JWT payload.
@@ -734,6 +746,7 @@ func (n *runtimeJavascriptNakamaModule) jwtGenerate(r *goja.Runtime) func(goja.F
 	}
 }
 
+// @group utils
 // @summary aes128 encrypt a string input.
 // @param input(string) The string which will be aes128 encrypted.
 // @param key(string) The 16 Byte encryption key.
@@ -753,6 +766,7 @@ func (n *runtimeJavascriptNakamaModule) aes128Encrypt(r *goja.Runtime) func(goja
 	}
 }
 
+// @group utils
 // @summary Decrypt an aes128 encrypted string.
 // @param input(string) The string to be decrypted.
 // @param key(string) The 16 Byte decryption key.
@@ -772,6 +786,7 @@ func (n *runtimeJavascriptNakamaModule) aes128Decrypt(r *goja.Runtime) func(goja
 	}
 }
 
+// @group utils
 // @summary aes256 encrypt a string input.
 // @param input(string) The string which will be aes256 encrypted.
 // @param key(string) The 32 Byte encryption key.
@@ -791,6 +806,7 @@ func (n *runtimeJavascriptNakamaModule) aes256Encrypt(r *goja.Runtime) func(goja
 	}
 }
 
+// @group utils
 // @summary Decrypt an aes256 encrypted string.
 // @param input(string) The string to be decrypted.
 // @param key(string) The 32 Byte decryption key.
@@ -810,6 +826,7 @@ func (n *runtimeJavascriptNakamaModule) aes256Decrypt(r *goja.Runtime) func(goja
 	}
 }
 
+// @group utils
 // @summary aes encrypt a string input and return the cipher text base64 encoded.
 // @param keySize(int) The size in bytes of the encryption key.
 // @param input(string) The string which will be encrypted.
@@ -843,6 +860,7 @@ func (n *runtimeJavascriptNakamaModule) aesEncrypt(keySize int, input, key strin
 	return base64.StdEncoding.EncodeToString(cipherText), nil
 }
 
+// @group utils
 // @summary aes decrypt a base 64 encoded string input.
 // @param keySize(int) The size in bytes of the decryption key.
 // @param input(string) The string which will be decrypted.
@@ -873,6 +891,7 @@ func (n *runtimeJavascriptNakamaModule) aesDecrypt(keySize int, input, key strin
 	return string(cipherText), nil
 }
 
+// @group utils
 // @summary Create an md5 hash from the input.
 // @param input(string) The input string to hash.
 // @return hash(string) A string with the md5 hash of the input.
@@ -887,6 +906,7 @@ func (n *runtimeJavascriptNakamaModule) md5Hash(r *goja.Runtime) func(goja.Funct
 	}
 }
 
+// @group utils
 // @summary Create an SHA256 hash from the input.
 // @param input(string) The input string to hash.
 // @return hash(string) A string with the SHA256 hash of the input.
@@ -901,6 +921,7 @@ func (n *runtimeJavascriptNakamaModule) sha256Hash(r *goja.Runtime) func(goja.Fu
 	}
 }
 
+// @group utils
 // @summary Create a RSA encrypted SHA256 hash from the input.
 // @param input(string) The input string to hash.
 // @param key(string) The RSA private key.
@@ -933,6 +954,7 @@ func (n *runtimeJavascriptNakamaModule) rsaSHA256Hash(r *goja.Runtime) func(goja
 	}
 }
 
+// @group utils
 // @summary Create a HMAC-SHA256 hash from input and key.
 // @param input(string) The input string to hash.
 // @param key(string) The hashing key.
@@ -956,6 +978,7 @@ func (n *runtimeJavascriptNakamaModule) hmacSHA256Hash(r *goja.Runtime) func(goj
 	}
 }
 
+// @group utils
 // @summary Generate one-way hashed string using bcrypt.
 // @param input(string) The input string to bcrypt.
 // @return hash(string) Hashed string.
@@ -972,6 +995,7 @@ func (n *runtimeJavascriptNakamaModule) bcryptHash(r *goja.Runtime) func(goja.Fu
 	}
 }
 
+// @group utils
 // @summary Compare hashed input against a plaintext input.
 // @param input(string) The bcrypted input string.
 // @param plaintext(string) Plaintext input to compare against.
@@ -1000,6 +1024,7 @@ func (n *runtimeJavascriptNakamaModule) bcryptCompare(r *goja.Runtime) func(goja
 	}
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using an Apple sign in token.
 // @param token(string) Apple sign in token.
 // @param username(string) The user's username. If left empty, one is generated.
@@ -1050,6 +1075,7 @@ func (n *runtimeJavascriptNakamaModule) authenticateApple(r *goja.Runtime) func(
 	}
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using a custom authentication managed by an external service or source not already supported by Nakama.
 // @param id(string) Custom ID to use to authenticate the user. Must be between 6-128 characters.
 // @param username(string) The user's username. If left empty, one is generated.
@@ -1100,6 +1126,7 @@ func (n *runtimeJavascriptNakamaModule) authenticateCustom(r *goja.Runtime) func
 	}
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using a device identifier.
 // @param id(string) Device ID to use to authenticate the user. Must be between 1-128 characters.
 // @param username(string) The user's username. If left empty, one is generated.
@@ -1150,6 +1177,7 @@ func (n *runtimeJavascriptNakamaModule) authenticateDevice(r *goja.Runtime) func
 	}
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using an email address and password.
 // @param email(string) Email address to use to authenticate the user. Must be between 10-255 characters.
 // @param password(string) Password to set. Must be longer than 8 characters.
@@ -1227,6 +1255,7 @@ func (n *runtimeJavascriptNakamaModule) authenticateEmail(r *goja.Runtime) func(
 	}
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using a Facebook account token.
 // @param token(string) Facebook OAuth or Limited Login (JWT) access token.
 // @param import(bool) Whether to automatically import Facebook friends after authentication. This is true by default.
@@ -1284,6 +1313,7 @@ func (n *runtimeJavascriptNakamaModule) authenticateFacebook(r *goja.Runtime) fu
 	}
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using a Facebook Instant Game.
 // @param playerInfo(string) Facebook Player info.
 // @param username(string) The user's username. If left empty, one is generated.
@@ -1330,6 +1360,7 @@ func (n *runtimeJavascriptNakamaModule) authenticateFacebookInstantGame(r *goja.
 	}
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using Apple Game Center credentials.
 // @param playerId(string) PlayerId provided by GameCenter.
 // @param bundleId(string) BundleId of your app on iTunesConnect.
@@ -1401,6 +1432,7 @@ func (n *runtimeJavascriptNakamaModule) authenticateGameCenter(r *goja.Runtime) 
 	}
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using a Google ID token.
 // @param token(string) Google OAuth access token.
 // @param username(string) The user's username. If left empty, one is generated.
@@ -1447,6 +1479,7 @@ func (n *runtimeJavascriptNakamaModule) authenticateGoogle(r *goja.Runtime) func
 	}
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using a Steam account token.
 // @param token(string) Steam token.
 // @param username(string) The user's username. If left empty, one is generated.
@@ -1509,6 +1542,7 @@ func (n *runtimeJavascriptNakamaModule) authenticateSteam(r *goja.Runtime) func(
 	}
 }
 
+// @group authenticate
 // @summary Generate a Nakama session token from a user ID.
 // @param userId(string) User ID to use to generate the token.
 // @param username(string) The user's username. If left empty, one is generated.
@@ -1551,6 +1585,7 @@ func (n *runtimeJavascriptNakamaModule) authenticateTokenGenerate(r *goja.Runtim
 	}
 }
 
+// @group accounts
 // @summary Fetch account information by user ID.
 // @param userId(string) User ID to fetch information for. Must be valid UUID.
 // @return account(nkruntime.Account) All account information including wallet, device IDs and more.
@@ -1580,6 +1615,7 @@ func (n *runtimeJavascriptNakamaModule) accountGetId(r *goja.Runtime) func(goja.
 	}
 }
 
+// @group accounts
 // @summary Fetch information for multiple accounts by user IDs.
 // @param userIds([]string) Array of user IDs to fetch information for. Must be valid UUID.
 // @return account(nkruntime.Accounts) Array of accounts.
@@ -1627,6 +1663,7 @@ func (n *runtimeJavascriptNakamaModule) accountsGetId(r *goja.Runtime) func(goja
 	}
 }
 
+// @group accounts
 // @summary Update an account by user ID.
 // @param userId(string) User ID for which the information is to be updated. Must be valid UUID.
 // @param metadata(map[string]interface{}) The metadata to update for this account.
@@ -1704,6 +1741,7 @@ func (n *runtimeJavascriptNakamaModule) accountUpdateId(r *goja.Runtime) func(go
 	}
 }
 
+// @group accounts
 // @summary Delete an account by user ID.
 // @param userId(string) User ID for the account to be deleted. Must be valid UUID.
 // @param recorded(bool) Whether to record this deletion in the database. By default this is set to false.
@@ -1728,6 +1766,7 @@ func (n *runtimeJavascriptNakamaModule) accountDeleteId(r *goja.Runtime) func(go
 	}
 }
 
+// @group accounts
 // @summary Export account information for a specified user ID.
 // @param userId(string) User ID for the account to be exported. Must be valid UUID.
 // @return export(string) Account information for the provided user ID, in JSON format.
@@ -1753,6 +1792,7 @@ func (n *runtimeJavascriptNakamaModule) accountExportId(r *goja.Runtime) func(go
 	}
 }
 
+// @group users
 // @summary Fetch one or more users by ID.
 // @param userIds([]string) An array of user IDs to fetch.
 // @return users(nkruntime.User[]) A list of user record objects.
@@ -1818,6 +1858,7 @@ func (n *runtimeJavascriptNakamaModule) usersGetId(r *goja.Runtime) func(goja.Fu
 	}
 }
 
+// @group users
 // @summary Fetch one or more users by username.
 // @param usernames([]string) An array of usernames to fetch.
 // @return users(nkruntime.User[]) A list of user record objects.
@@ -1862,6 +1903,7 @@ func (n *runtimeJavascriptNakamaModule) usersGetUsername(r *goja.Runtime) func(g
 	}
 }
 
+// @group users
 // @summary Fetch one or more users randomly.
 // @param count(number) The number of users to fetch.
 // @return users(nkruntime.User[]) A list of user record objects.
@@ -1892,6 +1934,7 @@ func (n *runtimeJavascriptNakamaModule) usersGetRandom(r *goja.Runtime) func(goj
 	}
 }
 
+// @group users
 // @summary Ban one or more users by ID.
 // @param userIds(string[]) An array of user IDs to ban.
 // @return error(error) An optional error value if an error occurred.
@@ -1930,6 +1973,7 @@ func (n *runtimeJavascriptNakamaModule) usersBanId(r *goja.Runtime) func(goja.Fu
 	}
 }
 
+// @group users
 // @summary Unban one or more users by ID.
 // @param userIds(string[]) An array of user IDs to unban.
 // @return error(error) An optional error value if an error occurred.
@@ -1968,6 +2012,7 @@ func (n *runtimeJavascriptNakamaModule) usersUnbanId(r *goja.Runtime) func(goja.
 	}
 }
 
+// @group authenticate
 // @summary Link Apple authentication to a user ID.
 // @param userId(string) The user ID to be linked.
 // @param token(string) Apple sign in token.
@@ -1993,6 +2038,7 @@ func (n *runtimeJavascriptNakamaModule) linkApple(r *goja.Runtime) func(goja.Fun
 	}
 }
 
+// @group authenticate
 // @summary Link custom authentication to a user ID.
 // @param userId(string) The user ID to be linked.
 // @param customId(string) Custom ID to be linked to the user.
@@ -2018,6 +2064,7 @@ func (n *runtimeJavascriptNakamaModule) linkCustom(r *goja.Runtime) func(goja.Fu
 	}
 }
 
+// @group authenticate
 // @summary Link device authentication to a user ID.
 // @param userId(string) The user ID to be linked.
 // @param deviceId(string) Device ID to be linked to the user.
@@ -2043,6 +2090,7 @@ func (n *runtimeJavascriptNakamaModule) linkDevice(r *goja.Runtime) func(goja.Fu
 	}
 }
 
+// @group authenticate
 // @summary Link email authentication to a user ID.
 // @param userId(string) The user ID to be linked.
 // @param email(string) Authentication email to be linked to the user.
@@ -2073,6 +2121,7 @@ func (n *runtimeJavascriptNakamaModule) linkEmail(r *goja.Runtime) func(goja.Fun
 	}
 }
 
+// @group authenticate
 // @summary Link Facebook authentication to a user ID.
 // @param userId(string) The user ID to be linked.
 // @param username(string) If left empty, one is generated.
@@ -2108,6 +2157,7 @@ func (n *runtimeJavascriptNakamaModule) linkFacebook(r *goja.Runtime) func(goja.
 	}
 }
 
+// @group authenticate
 // @summary Link Facebook Instant Game authentication to a user ID.
 // @param userId(string) The user ID to be linked.
 // @param playerInfo(string) Facebook player info.
@@ -2133,6 +2183,7 @@ func (n *runtimeJavascriptNakamaModule) linkFacebookInstantGame(r *goja.Runtime)
 	}
 }
 
+// @group authenticate
 // @summary Link Apple Game Center authentication to a user ID.
 // @param userId(string) The user ID to be linked.
 // @param playerId(string) Player ID provided by Game Center.
@@ -2183,6 +2234,7 @@ func (n *runtimeJavascriptNakamaModule) linkGameCenter(r *goja.Runtime) func(goj
 	}
 }
 
+// @group authenticate
 // @summary Link Google authentication to a user ID.
 // @param userId(string) The user ID to be linked.
 // @param token(string) Google OAuth access token.
@@ -2208,6 +2260,7 @@ func (n *runtimeJavascriptNakamaModule) linkGoogle(r *goja.Runtime) func(goja.Fu
 	}
 }
 
+// @group authenticate
 // @summary Link Steam authentication to a user ID.
 // @param userId(string) The user ID to be linked.
 // @param username(string) If left empty, one is generated.
@@ -2243,6 +2296,7 @@ func (n *runtimeJavascriptNakamaModule) linkSteam(r *goja.Runtime) func(goja.Fun
 	}
 }
 
+// @group authenticate
 // @summary Unlink Apple authentication from a user ID.
 // @param userId(string) The user ID to be unlinked.
 // @param token(string) Apple sign in token.
@@ -2268,6 +2322,7 @@ func (n *runtimeJavascriptNakamaModule) unlinkApple(r *goja.Runtime) func(goja.F
 	}
 }
 
+// @group authenticate
 // @summary Unlink custom authentication from a user ID.
 // @param userId(string) The user ID to be unlinked.
 // @param customId(string) Custom ID to be unlinked from the user.
@@ -2293,6 +2348,7 @@ func (n *runtimeJavascriptNakamaModule) unlinkCustom(r *goja.Runtime) func(goja.
 	}
 }
 
+// @group authenticate
 // @summary Unlink device authentication from a user ID.
 // @param userId(string) The user ID to be unlinked.
 // @param deviceId(string) Device ID to be unlinked to the user.
@@ -2318,6 +2374,7 @@ func (n *runtimeJavascriptNakamaModule) unlinkDevice(r *goja.Runtime) func(goja.
 	}
 }
 
+// @group authenticate
 // @summary Unlink email authentication from a user ID.
 // @param userId(string) The user ID to be unlinked.
 // @param email(string) Email to be unlinked from the user.
@@ -2343,6 +2400,7 @@ func (n *runtimeJavascriptNakamaModule) unlinkEmail(r *goja.Runtime) func(goja.F
 	}
 }
 
+// @group authenticate
 // @summary Unlink Facebook authentication from a user ID.
 // @param userId(string) The user ID to be unlinked.
 // @param token(string) Facebook OAuth or Limited Login (JWT) access token.
@@ -2368,6 +2426,7 @@ func (n *runtimeJavascriptNakamaModule) unlinkFacebook(r *goja.Runtime) func(goj
 	}
 }
 
+// @group authenticate
 // @summary Unlink Facebook Instant Game authentication from a user ID.
 // @param userId(string) The user ID to be unlinked.
 // @param playerInfo(string) Facebook player info.
@@ -2393,6 +2452,7 @@ func (n *runtimeJavascriptNakamaModule) unlinkFacebookInstantGame(r *goja.Runtim
 	}
 }
 
+// @group authenticate
 // @summary Unlink Apple Game Center authentication from a user ID.
 // @param userId(string) The user ID to be unlinked.
 // @param playerId(string) Player ID provided by Game Center.
@@ -2443,6 +2503,7 @@ func (n *runtimeJavascriptNakamaModule) unlinkGameCenter(r *goja.Runtime) func(g
 	}
 }
 
+// @group authenticate
 // @summary Unlink Google authentication from a user ID.
 // @param userId(string) The user ID to be unlinked.
 // @param token(string) Google OAuth access token.
@@ -2468,6 +2529,7 @@ func (n *runtimeJavascriptNakamaModule) unlinkGoogle(r *goja.Runtime) func(goja.
 	}
 }
 
+// @group authenticate
 // @summary Unlink Steam authentication from a user ID.
 // @param userId(string) The user ID to be unlinked.
 // @param token(string) Steam access token.
@@ -2493,6 +2555,7 @@ func (n *runtimeJavascriptNakamaModule) unlinkSteam(r *goja.Runtime) func(goja.F
 	}
 }
 
+// @group streams
 // @summary List all users currently online and connected to a stream.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param streamIn(string) The primary stream subject, typically a user ID.
@@ -2541,6 +2604,7 @@ func (n *runtimeJavascriptNakamaModule) streamUserList(r *goja.Runtime) func(goj
 	}
 }
 
+// @group streams
 // @summary Retreive a stream presence and metadata by user ID.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param streamIn(string) The primary stream subject, typically a user ID.
@@ -2595,6 +2659,7 @@ func (n *runtimeJavascriptNakamaModule) streamUserGet(r *goja.Runtime) func(goja
 	}
 }
 
+// @group streams
 // @summary Add a user to a stream.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param streamIn(string) The primary stream subject, typically a user ID.
@@ -2669,6 +2734,7 @@ func (n *runtimeJavascriptNakamaModule) streamUserJoin(r *goja.Runtime) func(goj
 	}
 }
 
+// @group streams
 // @summary Update a stream user by ID.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param streamIn(string) The primary stream subject, typically a user ID.
@@ -2742,6 +2808,7 @@ func (n *runtimeJavascriptNakamaModule) streamUserUpdate(r *goja.Runtime) func(g
 	}
 }
 
+// @group streams
 // @summary Remove a user from a stream.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param streamIn(string) The primary stream subject, typically a user ID.
@@ -2789,6 +2856,7 @@ func (n *runtimeJavascriptNakamaModule) streamUserLeave(r *goja.Runtime) func(go
 	}
 }
 
+// @group streams
 // @summary Kick a user from a stream.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param streamIn(string) The primary stream subject, typically a user ID.
@@ -2869,6 +2937,7 @@ func (n *runtimeJavascriptNakamaModule) streamUserKick(r *goja.Runtime) func(goj
 	}
 }
 
+// @group streams
 // @summary Get a count of stream presences.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param streamIn(string) The primary stream subject, typically a user ID.
@@ -2895,6 +2964,7 @@ func (n *runtimeJavascriptNakamaModule) streamCount(r *goja.Runtime) func(goja.F
 	}
 }
 
+// @group streams
 // @summary Close a stream and remove all presences on it.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param streamIn(string) The primary stream subject, typically a user ID.
@@ -2920,6 +2990,7 @@ func (n *runtimeJavascriptNakamaModule) streamClose(r *goja.Runtime) func(goja.F
 	}
 }
 
+// @group streams
 // @summary Send data to presences on a stream.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param streamIn(string) The primary stream subject, typically a user ID.
@@ -3022,6 +3093,7 @@ func (n *runtimeJavascriptNakamaModule) streamSend(r *goja.Runtime) func(goja.Fu
 	}
 }
 
+// @group streams
 // @summary Send a message to presences on a stream.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param streamIn(string) The primary stream subject, typically a user ID.
@@ -3119,6 +3191,7 @@ func (n *runtimeJavascriptNakamaModule) streamSendRaw(r *goja.Runtime) func(goja
 	}
 }
 
+// @group sessions
 // @summary Disconnect a session.
 // @param sessionId(string) The ID of the session to be disconnected.
 // @param reason(nkruntime.PresenceReason) The reason for the session disconnect.
@@ -3151,6 +3224,7 @@ func (n *runtimeJavascriptNakamaModule) sessionDisconnect(r *goja.Runtime) func(
 	}
 }
 
+// @group sessions
 // @summary Log out a user from their current session.
 // @param userId(string) The ID of the user to be logged out.
 // @param token(string) The current session authentication token.
@@ -3195,6 +3269,7 @@ func (n *runtimeJavascriptNakamaModule) sessionLogout(r *goja.Runtime) func(goja
 	}
 }
 
+// @group matches
 // @summary Create a new authoritative realtime multiplayer match running on the given runtime module name. The given params are passed to the match's init hook.
 // @param module(string) The name of an available runtime module that will be responsible for the match. This was registered in InitModule.
 // @param params(Opt {[key:string]:any}) Any value to pass to the match init hook.
@@ -3228,6 +3303,7 @@ func (n *runtimeJavascriptNakamaModule) matchCreate(r *goja.Runtime) func(goja.F
 	}
 }
 
+// @group matches
 // @summary Get information on a running match.
 // @param id(string) The ID of the match to fetch.
 // @return match(nkruntime.Match) Information for the running match.
@@ -3260,6 +3336,7 @@ func (n *runtimeJavascriptNakamaModule) matchGet(r *goja.Runtime) func(goja.Func
 	}
 }
 
+// @group matches
 // @summary List currently running realtime multiplayer matches and optionally filter them by authoritative mode, label, and current participant count.
 // @param limit(number) The maximum number of matches to list. Default 1.
 // @param authoritative(bool) Set true to only return authoritative matches, false to only return relayed matches. Default false.
@@ -3326,6 +3403,7 @@ func (n *runtimeJavascriptNakamaModule) matchList(r *goja.Runtime) func(goja.Fun
 	}
 }
 
+// @group matches
 // @summary Allow the match handler to be sent a reservation signal to mark a user ID or session ID into the match state ahead of their join attempt and eventual join flow. Called when the match handler receives a runtime signal.
 // @param id(string) The user ID or session ID to send a reservation signal for.
 // @param data(string) An arbitrary input supplied by the runtime caller of the signal.
@@ -3349,6 +3427,7 @@ func (n *runtimeJavascriptNakamaModule) matchSignal(r *goja.Runtime) func(goja.F
 	}
 }
 
+// @group notifications
 // @summary Send one in-app notification to a user.
 // @param userId(string) The user ID of the user to be sent the notification.
 // @param subject(string) Notification subject. Must be set.
@@ -3425,6 +3504,7 @@ func (n *runtimeJavascriptNakamaModule) notificationSend(r *goja.Runtime) func(g
 	}
 }
 
+// @group notifications
 // @summary Send one or more in-app notifications to a user.
 // @param notifications(table) A list of notifications to be sent together.
 // @return error(error) An optional error value if an error occurred.
@@ -3542,6 +3622,7 @@ func (n *runtimeJavascriptNakamaModule) notificationsSend(r *goja.Runtime) func(
 	}
 }
 
+// @group wallets
 // @summary Update a user's wallet with the given changeset.
 // @param userId(string) The ID of the user whose wallet to update.
 // @param changeset({[key: string]: number}) The set of wallet operations to apply.
@@ -3611,6 +3692,7 @@ func (n *runtimeJavascriptNakamaModule) walletUpdate(r *goja.Runtime) func(goja.
 	}
 }
 
+// @group wallets
 // @summary Update one or more user wallets with individual changesets. This function will also insert a new wallet ledger item into each user's wallet history that tracks their update.
 // @param updates(nkruntime.WalletUpdate[]) The set of user wallet update operations to apply.
 // @param updateLedger(bool) Whether to record this update in the ledger. Defaults to false.
@@ -3705,6 +3787,7 @@ func (n *runtimeJavascriptNakamaModule) walletsUpdate(r *goja.Runtime) func(goja
 	}
 }
 
+// @group wallets
 // @summary Update the metadata for a particular wallet update in a user's wallet ledger history. Useful when adding a note to a transaction for example.
 // @param itemId(string) The ID of the wallet ledger item to update.
 // @param metadata(Object) The new metadata to set on the wallet ledger item.
@@ -3747,6 +3830,7 @@ func (n *runtimeJavascriptNakamaModule) walletLedgerUpdate(r *goja.Runtime) func
 	}
 }
 
+// @group wallets
 // @summary List all wallet updates for a particular user from oldest to newest.
 // @param userId(string) The ID of the user to list wallet updates for.
 // @param limit(number) Limit number of results. Defaults to 100.
@@ -3804,6 +3888,7 @@ func (n *runtimeJavascriptNakamaModule) walletLedgerList(r *goja.Runtime) func(g
 	}
 }
 
+// @group storage
 // @summary List records in a collection and page through results. The records returned can be filtered to those owned by the user or "" for public records.
 // @param userId(string) User ID to list records for or "" (empty string) for public records.
 // @param collection(string) Collection to list data from.
@@ -3881,6 +3966,7 @@ func (n *runtimeJavascriptNakamaModule) storageList(r *goja.Runtime) func(goja.F
 	}
 }
 
+// @group storage
 // @summary Fetch one or more records by their bucket/collection/keyname and optional user.
 // @param objectIds(nkruntime.StorageReadRequest[]) An array of object identifiers to be fetched.
 // @return objects(nkruntime.StorageObject[]) A list of matches matching the parameters criteria.
@@ -3986,6 +4072,7 @@ func (n *runtimeJavascriptNakamaModule) storageRead(r *goja.Runtime) func(goja.F
 	}
 }
 
+// @group storage
 // @summary Write one or more objects by their collection/keyname and optional user.
 // @param objectIds(nkruntime.StorageWriteRequest[]) An array of object identifiers to be written.
 // @return acks(nkruntime.StorageWriteAcks) A list of acks with the version of the written objects.
@@ -4123,6 +4210,7 @@ func (n *runtimeJavascriptNakamaModule) storageWrite(r *goja.Runtime) func(goja.
 	}
 }
 
+// @group storage
 // @summary Remove one or more objects by their collection/keyname and optional user.
 // @param objectIds(nkruntime.StorageDeleteRequest[]) An array of object identifiers to be deleted.
 // @return error(error) An optional error value if an error occurred.
@@ -4541,6 +4629,7 @@ func (n *runtimeJavascriptNakamaModule) multiUpdate(r *goja.Runtime) func(goja.F
 	}
 }
 
+// @group leaderboards
 // @summary Setup a new dynamic leaderboard with the specified ID and various configuration settings. The leaderboard will be created if it doesn't already exist, otherwise its configuration will not be updated.
 // @param id(string) The unique identifier for the new leaderboard. This is used by clients to submit scores.
 // @param authoritative(bool) Mark the leaderboard as authoritative which ensures updates can only be made via the Go runtime. No client can submit a score directly. Default false.
@@ -4627,6 +4716,7 @@ func (n *runtimeJavascriptNakamaModule) leaderboardCreate(r *goja.Runtime) func(
 	}
 }
 
+// @group leaderboards
 // @summary Delete a leaderboard and all scores that belong to it.
 // @param id(string) The unique identifier for the leaderboard to delete.
 // @return error(error) An optional error value if an error occurred.
@@ -4647,6 +4737,7 @@ func (n *runtimeJavascriptNakamaModule) leaderboardDelete(r *goja.Runtime) func(
 	}
 }
 
+// @group leaderboards
 // @summary Find leaderboards which have been created on the server. Leaderboards can be filtered with categories.
 // @param categoryStart(number) Filter leaderboards with categories greater or equal than this value.
 // @param categoryEnd(number) Filter leaderboards with categories equal or less than this value.
@@ -4726,6 +4817,7 @@ func (n *runtimeJavascriptNakamaModule) leaderboardList(r *goja.Runtime) func(go
 	}
 }
 
+// @group leaderboards
 // @summary List records on the specified leaderboard, optionally filtering to only a subset of records by their owners. Records will be listed in the preconfigured leaderboard sort order.
 // @param id(string) The unique identifier for the leaderboard to list. Mandatory field.
 // @param owners(string[]) Array of owners to filter to.
@@ -4791,6 +4883,7 @@ func (n *runtimeJavascriptNakamaModule) leaderboardRecordsList(r *goja.Runtime) 
 	}
 }
 
+// @group leaderboards
 // @summary Use the preconfigured operator for the given leaderboard to submit a score for a particular user.
 // @param id(string) The unique identifier for the leaderboard to submit to.
 // @param owner(string) The owner of this score submission. Mandatory field.
@@ -4867,6 +4960,7 @@ func (n *runtimeJavascriptNakamaModule) leaderboardRecordWrite(r *goja.Runtime) 
 	}
 }
 
+// @group leaderboards
 // @summary Remove an owner's record from a leaderboard, if one exists.
 // @param id(string) The unique identifier for the leaderboard to delete from.
 // @param owner(string) The owner of the score to delete. Mandatory field.
@@ -4891,6 +4985,7 @@ func (n *runtimeJavascriptNakamaModule) leaderboardRecordDelete(r *goja.Runtime)
 	}
 }
 
+// @group leaderboards
 // @summary Fetch one or more leaderboards by ID.
 // @param ids(string[]) The table array of leaderboard ids.
 // @return leaderboards(nkruntime.Leaderboard) The leaderboard records according to ID.
@@ -4928,6 +5023,7 @@ func (n *runtimeJavascriptNakamaModule) leaderboardsGetId(r *goja.Runtime) func(
 	}
 }
 
+// @group purchases
 // @summary Validates and stores the purchases present in an Apple App Store Receipt.
 // @param userId(string) The user ID of the owner of the receipt.
 // @param receipt(string) Base-64 encoded receipt data returned by the purchase operation itself.
@@ -4970,6 +5066,7 @@ func (n *runtimeJavascriptNakamaModule) purchaseValidateApple(r *goja.Runtime) f
 	}
 }
 
+// @group purchases
 // @summary Validates and stores a purchase receipt from the Google Play Store.
 // @param userId(string) The user ID of the owner of the receipt.
 // @param receipt(string) JSON encoded Google receipt.
@@ -5006,6 +5103,7 @@ func (n *runtimeJavascriptNakamaModule) purchaseValidateGoogle(r *goja.Runtime) 
 	}
 }
 
+// @group purchases
 // @summary Validates and stores a purchase receipt from the Huawei App Gallery.
 // @param userId(string) The user ID of the owner of the receipt.
 // @param receipt(string) The Huawei receipt data.
@@ -5050,6 +5148,7 @@ func (n *runtimeJavascriptNakamaModule) purchaseValidateHuawei(r *goja.Runtime) 
 	}
 }
 
+// @group purchases
 // @summary Look up a purchase receipt by transaction ID.
 // @param transactionId(string) Transaction ID of the purchase to look up.
 // @return owner(string) The owner of the purchase.
@@ -5074,6 +5173,7 @@ func (n *runtimeJavascriptNakamaModule) purchaseGetByTransactionId(r *goja.Runti
 	}
 }
 
+// @group purchases
 // @summary List stored validated purchase receipts.
 // @param userId(string) Filter by user ID. Can be an empty string to list purchases for all users.
 // @param limit(number) Limit number of records retrieved. Defaults to 100.
@@ -5124,6 +5224,7 @@ func (n *runtimeJavascriptNakamaModule) purchasesList(r *goja.Runtime) func(goja
 	}
 }
 
+// @group tournaments
 // @summary Setup a new dynamic tournament with the specified ID and various configuration settings. The underlying leaderboard will be created if it doesn't already exist, otherwise its configuration will not be updated.
 // @param id(string) The unique identifier for the new tournament. This is used by clients to submit scores.
 // @param authoritative(bool) Whether the tournament created is server authoritative. Default true.
@@ -5280,6 +5381,7 @@ func (n *runtimeJavascriptNakamaModule) tournamentCreate(r *goja.Runtime) func(g
 	}
 }
 
+// @group tournaments
 // @summary Delete a tournament and all records that belong to it.
 // @param id(string) The unique identifier for the tournament to delete.
 // @return error(error) An optional error value if an error occurred.
@@ -5298,6 +5400,7 @@ func (n *runtimeJavascriptNakamaModule) tournamentDelete(r *goja.Runtime) func(g
 	}
 }
 
+// @group tournaments
 // @summary Add additional score attempts to the owner's tournament record. This overrides the max number of score attempts allowed in the tournament for this specific owner.
 // @param id(string) The unique identifier for the tournament to update.
 // @param owner(string) The owner of the records to increment the count for.
@@ -5330,6 +5433,7 @@ func (n *runtimeJavascriptNakamaModule) tournamentAddAttempt(r *goja.Runtime) fu
 	}
 }
 
+// @group tournaments
 // @summary A tournament may need to be joined before the owner can submit scores. This operation is idempotent and will always succeed for the owner even if they have already joined the tournament.
 // @param id(string) The unique identifier for the tournament to join.
 // @param ownerId(string) The owner of the record.
@@ -5362,6 +5466,7 @@ func (n *runtimeJavascriptNakamaModule) tournamentJoin(r *goja.Runtime) func(goj
 	}
 }
 
+// @group tournaments
 // @summary Fetch one or more tournaments by ID.
 // @param ids(string[]) The table array of tournament ids.
 // @return result(nkruntime.Tournament[]) Array of tournament records.
@@ -5406,6 +5511,7 @@ func (n *runtimeJavascriptNakamaModule) tournamentsGetId(r *goja.Runtime) func(g
 	}
 }
 
+// @group tournaments
 // @summary List records on the specified tournament, optionally filtering to only a subset of records by their owners. Records will be listed in the preconfigured tournament sort order.
 // @param tournamentId(string) The ID of the tournament to list records for.
 // @param ownerIds(string[]) Array of owner IDs to filter results by. Optional.
@@ -5535,6 +5641,7 @@ func leaderboardRecordToJsMap(r *goja.Runtime, record *api.LeaderboardRecord) ma
 	return recordMap
 }
 
+// @group tournaments
 // @summary Find tournaments which have been created on the server. Tournaments can be filtered with categories and via start and end times.
 // @param categoryStart(number) Filter tournament with categories greater or equal than this value.
 // @param categoryEnd(number) Filter tournament with categories equal or less than this value.
@@ -5636,6 +5743,7 @@ func (n *runtimeJavascriptNakamaModule) tournamentList(r *goja.Runtime) func(goj
 	}
 }
 
+// @group tournaments
 // @summary Submit a score and optional subscore to a tournament leaderboard. If the tournament has been configured with join required this will fail unless the owner has already joined the tournament.
 // @param id(string) The unique identifier for the tournament leaderboard to submit to.
 // @param owner(string) The owner of this score submission. Mandatory field.
@@ -5705,6 +5813,7 @@ func (n *runtimeJavascriptNakamaModule) tournamentRecordWrite(r *goja.Runtime) f
 	}
 }
 
+// @group tournaments
 // @summary Fetch the list of tournament records around the owner.
 // @param id(string) The ID of the tournament to list records for.
 // @param ownerId(string) The owner ID around which to show records.
@@ -5755,6 +5864,7 @@ func (n *runtimeJavascriptNakamaModule) tournamentRecordsHaystack(r *goja.Runtim
 	}
 }
 
+// @group groups
 // @summary Fetch one or more groups by their ID.
 // @param groupIds(string[]) An array of strings of the IDs for the groups to get.
 // @return getGroups(nkruntime.Group[]) An array of groups with their fields.
@@ -5807,6 +5917,7 @@ func (n *runtimeJavascriptNakamaModule) groupsGetId(r *goja.Runtime) func(goja.F
 	}
 }
 
+// @group groups
 // @summary Setup a group with various configuration settings. The group will be created if they don't exist or fail if the group name is taken.
 // @param userId(string) Mandatory. The user ID to be associated as the group superadmin.
 // @param name(string) Mandatory. Group name, must be unique.
@@ -5915,6 +6026,7 @@ func (n *runtimeJavascriptNakamaModule) groupCreate(r *goja.Runtime) func(goja.F
 	}
 }
 
+// @group groups
 // @summary Update a group with various configuration settings. The group which is updated can change some or all of its fields.
 // @param groupId(string) The ID of the group to update.
 // @param userId(string) User ID calling the update operation for permission checking. Set as nil to enact the changes as the system user.
@@ -6014,6 +6126,7 @@ func (n *runtimeJavascriptNakamaModule) groupUpdate(r *goja.Runtime) func(goja.F
 	}
 }
 
+// @group groups
 // @summary Delete a group.
 // @param groupId(string) The ID of the group to delete.
 // @return error(error) An optional error value if an error occurred.
@@ -6033,6 +6146,7 @@ func (n *runtimeJavascriptNakamaModule) groupDelete(r *goja.Runtime) func(goja.F
 	}
 }
 
+// @group groups
 // @summary Kick users from a group.
 // @param groupId(string) The ID of the group to kick users from.
 // @param userIds(string[]) Table array of user IDs to kick.
@@ -6088,6 +6202,7 @@ func (n *runtimeJavascriptNakamaModule) groupUsersKick(r *goja.Runtime) func(goj
 	}
 }
 
+// @group groups
 // @summary List all members, admins and superadmins which belong to a group. This also list incoming join requests.
 // @param groupId(string) The ID of the group to list members for.
 // @return groupUsers(nkruntime.GroupUserList) The user information for members, admins and superadmins for the group. Also users who sent a join request.
@@ -6192,6 +6307,7 @@ func (n *runtimeJavascriptNakamaModule) groupUsersList(r *goja.Runtime) func(goj
 	}
 }
 
+// @group groups
 // @summary List all groups which a user belongs to and whether they've been accepted or if it's an invite.
 // @param userId(string) The ID of the user to list groups for.
 // @return userGroups(nkruntime.UserGroupList) A table of groups with their fields.
@@ -6279,6 +6395,7 @@ func (n *runtimeJavascriptNakamaModule) userGroupsList(r *goja.Runtime) func(goj
 	}
 }
 
+// @group friends
 // @summary List all friends, invites, invited, and blocked which belong to a user.
 // @param userId(string) The ID of the user who's friends, invites, invited, and blocked you want to list.
 // @param limit(number) The number of friends to retrieve in this page of results. No more than 100 limit allowed per result.
@@ -6353,6 +6470,7 @@ func (n *runtimeJavascriptNakamaModule) friendsList(r *goja.Runtime) func(goja.F
 	}
 }
 
+// @group groups
 // @summary Join a group for a particular user.
 // @param groupId(string) The ID of the group to join.
 // @param userId(string) The user ID to add to this group.
@@ -6391,6 +6509,7 @@ func (n *runtimeJavascriptNakamaModule) groupUserJoin(r *goja.Runtime) func(goja
 	}
 }
 
+// @group groups
 // @summary Leave a group for a particular user.
 // @param groupId(string) The ID of the group to leave.
 // @param userId(string) The user ID to remove from this group.
@@ -6429,6 +6548,7 @@ func (n *runtimeJavascriptNakamaModule) groupUserLeave(r *goja.Runtime) func(goj
 	}
 }
 
+// @group groups
 // @summary Add users to a group.
 // @param groupId(string) The ID of the group to add users to.
 // @param userIds(string[]) Table array of user IDs to add to this group.
@@ -6490,6 +6610,7 @@ func (n *runtimeJavascriptNakamaModule) groupUsersAdd(r *goja.Runtime) func(goja
 	}
 }
 
+// @group groups
 // @summary Promote users in a group.
 // @param groupId(string) The ID of the group whose members are being promoted.
 // @param userIds(string[]) Table array of user IDs to promote.
@@ -6551,6 +6672,7 @@ func (n *runtimeJavascriptNakamaModule) groupUsersPromote(r *goja.Runtime) func(
 	}
 }
 
+// @group groups
 // @summary Demote users in a group.
 // @param groupId(string) The ID of the group whose members are being demoted.
 // @param userIds(string[]) Table array of user IDs to demote.
@@ -6612,6 +6734,7 @@ func (n *runtimeJavascriptNakamaModule) groupUsersDemote(r *goja.Runtime) func(g
 	}
 }
 
+// @group groups
 // @summary Find groups based on the entered criteria.
 // @param name(string) Search for groups that contain this value in their name.
 // @param langTag(string) Filter based upon the entered language tag.
@@ -6703,6 +6826,7 @@ func (n *runtimeJavascriptNakamaModule) groupsList(r *goja.Runtime) func(goja.Fu
 	}
 }
 
+// @group utils
 // @summary Read file from user device.
 // @param relPath(string) Relative path to the file to be read.
 // @return fileRead(string) The read file contents.
@@ -6783,6 +6907,7 @@ func (n *runtimeJavascriptNakamaModule) localcacheDelete(r *goja.Runtime) func(g
 	}
 }
 
+// @group chat
 // @summary Send a message on a realtime chat channel.
 // @param channelId(string) The ID of the channel to send the message on.
 // @param content(object) Message content. Must be set.
@@ -6851,6 +6976,7 @@ func (n *runtimeJavascriptNakamaModule) channelMessageSend(r *goja.Runtime) func
 	}
 }
 
+// @group chat
 // @summary Update a message on a realtime chat channel.
 // @param channelId(string) The ID of the channel to send the message on.
 // @param messageId(string) The ID of the message to update.
@@ -6922,6 +7048,7 @@ func (n *runtimeJavascriptNakamaModule) channelMessageUpdate(r *goja.Runtime) fu
 	}
 }
 
+// @group chat
 // @summary Create a channel identifier to be used in other runtime calls. Does not create a channel.
 // @param target(string) Can be the room name, group identifier, or another username.
 // @param chanType(nkruntime.ChannelType) The type of channel, for example group or direct.
