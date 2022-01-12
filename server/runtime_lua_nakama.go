@@ -276,6 +276,7 @@ func (n *RuntimeLuaNakamaModule) Loader(l *lua.LState) int {
 	return 1
 }
 
+// @group hooks
 // @summary Registers a function for use with client RPC to the server.
 // @param fn(function) A function reference which will be executed on each RPC message.
 // @param id(string) The unique identifier used to register the function for RPC.
@@ -300,6 +301,7 @@ func (n *RuntimeLuaNakamaModule) registerRPC(l *lua.LState) int {
 	return 0
 }
 
+// @group hooks
 // @summary Register a function with the server which will be executed before any non-realtime message with the specified message name.
 // @param fn(function) A function reference which will be executed on each message.
 // @param id(string) The specific message name to execute the function after.
@@ -324,6 +326,7 @@ func (n *RuntimeLuaNakamaModule) registerReqBefore(l *lua.LState) int {
 	return 0
 }
 
+// @group hooks
 // @summary Register a function with the server which will be executed after every non-realtime message as specified while registering the function.
 // @param fn(function) A function reference which will be executed on each message.
 // @param id(string) The specific message name to execute the function after.
@@ -348,6 +351,7 @@ func (n *RuntimeLuaNakamaModule) registerReqAfter(l *lua.LState) int {
 	return 0
 }
 
+// @group hooks
 // @summary Register a function with the server which will be executed before any realtime message with the specified message name.
 // @param fn(function) A function reference which will be executed on each msgname message. The function should pass the payload input back as a return argument so the pipeline can continue to execute the standard logic.
 // @param id(string) The specific message name to execute the function after.
@@ -372,6 +376,7 @@ func (n *RuntimeLuaNakamaModule) registerRTBefore(l *lua.LState) int {
 	return 0
 }
 
+// @group hooks
 // @summary Register a function with the server which will be executed after every realtime message with the specified message name.
 // @param fn(function) A function reference which will be executed on each msgname message.
 // @param id(string) The specific message name to execute the function after.
@@ -396,6 +401,7 @@ func (n *RuntimeLuaNakamaModule) registerRTAfter(l *lua.LState) int {
 	return 0
 }
 
+// @group hooks
 // @summary Registers a function that will be called when matchmaking finds opponents.
 // @param fn(function) A function reference which will be executed on each matchmake completion.
 // @return error(error) An optional error value if an error occurred.
@@ -411,6 +417,7 @@ func (n *RuntimeLuaNakamaModule) registerMatchmakerMatched(l *lua.LState) int {
 	return 0
 }
 
+// @group hooks
 // @summary Registers a function to be run when a tournament ends.
 // @param fn(function) A function reference which will be executed on each tournament end.
 // @return error(error) An optional error value if an error occurred.
@@ -426,6 +433,7 @@ func (n *RuntimeLuaNakamaModule) registerTournamentEnd(l *lua.LState) int {
 	return 0
 }
 
+// @group hooks
 // @summary Registers a function to be run when a tournament resets.
 // @param fn(function) A function reference which will be executed on each tournament reset.
 // @return error(error) An optional error value if an error occurred.
@@ -441,6 +449,7 @@ func (n *RuntimeLuaNakamaModule) registerTournamentReset(l *lua.LState) int {
 	return 0
 }
 
+// @group hooks
 // @summary Registers a function to be run when a leaderboard resets.
 // @param fn(function) A function reference which will be executed on each leaderboard reset.
 // @return error(error) An optional error value if an error occurred.
@@ -456,6 +465,7 @@ func (n *RuntimeLuaNakamaModule) registerLeaderboardReset(l *lua.LState) int {
 	return 0
 }
 
+// @group hooks
 // @summary Registers a function to be run only once.
 // @param fn(function) A function reference which will be executed only once.
 // @return error(error) An optional error value if an error occurred.
@@ -612,6 +622,7 @@ func (n *RuntimeLuaNakamaModule) localcacheDelete(l *lua.LState) int {
 	return 0
 }
 
+// @group utils
 // @summary Get the current UTC time in milliseconds using the system wall clock.
 // @return t(int) A number representing the current UTC time in milliseconds.
 // @return error(error) An optional error value if an error occurred.
@@ -638,6 +649,7 @@ func (n *RuntimeLuaNakamaModule) time(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary Parses a CRON expression and a timestamp in UTC seconds, and returns the next matching timestamp in UTC seconds.
 // @param expression(string) A valid CRON expression in standard format, for example "0 0 * * *" (meaning at midnight).
 // @param timestamp(number) A time value expressed as UTC seconds.
@@ -667,6 +679,7 @@ func (n *RuntimeLuaNakamaModule) cronNext(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary Execute an arbitrary SQL query and return the number of rows affected. Typically an "INSERT", "DELETE", or "UPDATE" statement with no return columns.
 // @param query(string) A SQL query to execute.
 // @param parameters(table) Arbitrary parameters to pass to placeholders in the query.
@@ -709,6 +722,7 @@ func (n *RuntimeLuaNakamaModule) sqlExec(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary Execute an arbitrary SQL query that is expected to return row data. Typically a "SELECT" statement.
 // @param query(string) A SQL query to execute.
 // @param parameters(table) Arbitrary parameters to pass to placeholders in the query.
@@ -779,6 +793,7 @@ func (n *RuntimeLuaNakamaModule) sqlQuery(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary Generate a version 4 UUID in the standard 36-character string representation.
 // @return u(string) The newly generated version 4 UUID identifier string.
 // @return error(error) An optional error value if an error occurred.
@@ -787,6 +802,7 @@ func (n *RuntimeLuaNakamaModule) uuidV4(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary Convert the 16-byte raw representation of a UUID into the equivalent 36-character standard UUID string representation. Will raise an error if the input is not valid and cannot be converted.
 // @param uuid_bytes(string) The UUID bytes to convert.
 // @return u(string) A string containing the equivalent 36-character standard representation of the UUID.
@@ -806,6 +822,7 @@ func (n *RuntimeLuaNakamaModule) uuidBytesToString(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary Convert the 36-character string representation of a UUID into the equivalent 16-byte raw UUID representation. Will raise an error if the input is not valid and cannot be converted.
 // @param uuid_string(string) The UUID string to convert.
 // @return u(string) A string containing the equivalent 16-byte representation of the UUID.
@@ -825,6 +842,7 @@ func (n *RuntimeLuaNakamaModule) uuidStringToBytes(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary Send a HTTP request that returns a data type containing the result of the HTTP response.
 // @param url(string) The URL of the web resource to request.
 // @param method(string) The HTTP method verb used with the request.
@@ -901,6 +919,7 @@ func (n *RuntimeLuaNakamaModule) httpRequest(l *lua.LState) int {
 	return 3
 }
 
+// @group utils
 // @summary Generate a JSON Web Token.
 // @param signingMethod(string) The signing method to be used, either HS256 or RS256.
 // @param claims(table) The JWT payload.
@@ -972,6 +991,7 @@ func (n *RuntimeLuaNakamaModule) jwtGenerate(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary Encode the input as JSON.
 // @param value(string) The input to encode as JSON .
 // @return jsonBytes(string) The encoded JSON string.
@@ -994,6 +1014,7 @@ func (n *RuntimeLuaNakamaModule) jsonEncode(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary Decode the JSON input as a Lua table.
 // @param jsonString(string) The JSON encoded input.
 // @return jsonData(table) Decoded JSON input as a Lua table.
@@ -1015,6 +1036,7 @@ func (n *RuntimeLuaNakamaModule) jsonDecode(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary Base64 encode a string input.
 // @param input(string) The string which will be base64 encoded.
 // @return output(string) Encoded string.
@@ -1037,6 +1059,7 @@ func (n *RuntimeLuaNakamaModule) base64Encode(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary Decode a base64 encoded string.
 // @param input(string) The string which will be base64 decoded.
 // @return output(string) Decoded string.
@@ -1067,6 +1090,7 @@ func (n *RuntimeLuaNakamaModule) base64Decode(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary Base64 URL encode a string input.
 // @param input(string) The string which will be base64 URL encoded.
 // @return output(string) Encoded string.
@@ -1089,6 +1113,7 @@ func (n *RuntimeLuaNakamaModule) base64URLEncode(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary Decode a base64 URL encoded string.
 // @param input(string) The string to be decoded.
 // @return output(string) Decoded string.
@@ -1119,6 +1144,7 @@ func (n *RuntimeLuaNakamaModule) base64URLDecode(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary base16 encode a string input.
 // @param input(string) The string to be encoded.
 // @return output(string) Encoded string.
@@ -1135,6 +1161,7 @@ func (n *RuntimeLuaNakamaModule) base16Encode(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary Decode a base16 encoded string.
 // @param input(string) The string to be decoded.
 // @return output(string) Decoded string.
@@ -1156,6 +1183,7 @@ func (n *RuntimeLuaNakamaModule) base16Decode(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary AES encrypt a string input and return the cipher text base64 encoded.
 // @param keySize(int) The size in bytes of the encryption key.
 // @param input(string) The string which will be encrypted.
@@ -1199,6 +1227,7 @@ func aesEncrypt(l *lua.LState, keySize int) int {
 	return 1
 }
 
+// @group utils
 // @summary aes decrypt a base 64 encoded string input.
 // @param keySize(int) The size in bytes of the decryption key.
 // @param input(string) The string which will be decrypted.
@@ -1239,6 +1268,7 @@ func aesDecrypt(l *lua.LState, keySize int) int {
 	return 1
 }
 
+// @group utils
 // @summary aes128 encrypt a string input.
 // @param input(string) The string which will be aes128 encrypted.
 // @param key(string) The 16 Byte encryption key.
@@ -1248,6 +1278,7 @@ func (n *RuntimeLuaNakamaModule) aes128Encrypt(l *lua.LState) int {
 	return aesEncrypt(l, 16)
 }
 
+// @group utils
 // @summary Decrypt an aes128 encrypted string.
 // @param input(string) The string to be decrypted.
 // @param key(string) The 16 Byte decryption key.
@@ -1257,6 +1288,7 @@ func (n *RuntimeLuaNakamaModule) aes128Decrypt(l *lua.LState) int {
 	return aesDecrypt(l, 16)
 }
 
+// @group utils
 // @summary aes256 encrypt a string input.
 // @param input(string) The string which will be aes256 encrypted.
 // @param key(string) The 32 Byte encryption key.
@@ -1266,6 +1298,7 @@ func (n *RuntimeLuaNakamaModule) aes256Encrypt(l *lua.LState) int {
 	return aesEncrypt(l, 32)
 }
 
+// @group utils
 // @summary Decrypt an aes256 encrypted string.
 // @param input(string) The string to be decrypted.
 // @param key(string) The 32 Byte decryption key.
@@ -1275,6 +1308,7 @@ func (n *RuntimeLuaNakamaModule) aes256Decrypt(l *lua.LState) int {
 	return aesDecrypt(l, 32)
 }
 
+// @group utils
 // @summary Create an md5 hash from the input.
 // @param input(string) The input string to hash.
 // @return hash(string) A string with the md5 hash of the input.
@@ -1292,6 +1326,7 @@ func (n *RuntimeLuaNakamaModule) md5Hash(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary Create an SHA256 hash from the input.
 // @param input(string) The input string to hash.
 // @return hash(string) A string with the SHA256 hash of the input.
@@ -1309,6 +1344,7 @@ func (n *RuntimeLuaNakamaModule) sha256Hash(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary Create a RSA encrypted SHA256 hash from the input.
 // @param input(string) The input string to hash.
 // @param key(string) The RSA private key.
@@ -1349,6 +1385,7 @@ func (n *RuntimeLuaNakamaModule) rsaSHA256Hash(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary Create a HMAC-SHA256 hash from input and key.
 // @param input(string) The input string to hash.
 // @param key(string) The hashing key.
@@ -1377,6 +1414,7 @@ func (n *RuntimeLuaNakamaModule) hmacSHA256Hash(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary Generate one-way hashed string using bcrypt.
 // @param input(string) The input string to bcrypt.
 // @return hash(string) Hashed string.
@@ -1398,6 +1436,7 @@ func (n *RuntimeLuaNakamaModule) bcryptHash(l *lua.LState) int {
 	return 1
 }
 
+// @group utils
 // @summary Compare hashed input against a plaintext input.
 // @param hash(string) The bcrypted input string.
 // @param plaintext(string) Plaintext input to compare against.
@@ -1428,6 +1467,7 @@ func (n *RuntimeLuaNakamaModule) bcryptCompare(l *lua.LState) int {
 	return 0
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using an Apple sign in token.
 // @param token(string) Apple sign in token.
 // @param username(Opt string) The user's username. If left empty, one is generated.
@@ -1476,6 +1516,7 @@ func (n *RuntimeLuaNakamaModule) authenticateApple(l *lua.LState) int {
 	return 3
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using a custom authentication managed by an external service or source not already supported by Nakama.
 // @param id(string) Custom ID to use to authenticate the user. Must be between 6-128 characters.
 // @param username(Opt string) The user's username. If left empty, one is generated.
@@ -1525,6 +1566,7 @@ func (n *RuntimeLuaNakamaModule) authenticateCustom(l *lua.LState) int {
 	return 3
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using a device identifier.
 // @param id(string) Device ID to use to authenticate the user. Must be between 1-128 characters.
 // @param username(Opt string) The user's username. If left empty, one is generated.
@@ -1574,6 +1616,7 @@ func (n *RuntimeLuaNakamaModule) authenticateDevice(l *lua.LState) int {
 	return 3
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using an email address and password.
 // @param email(string) Email address to use to authenticate the user. Must be between 10-255 characters.
 // @param password(string) Password to set. Must be longer than 8 characters.
@@ -1652,6 +1695,7 @@ func (n *RuntimeLuaNakamaModule) authenticateEmail(l *lua.LState) int {
 	return 3
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using a Facebook account token.
 // @param token(string) Facebook OAuth or Limited Login (JWT) access token.
 // @param import(bool) Whether to automatically import Facebook friends after authentication. This is true by default.
@@ -1705,6 +1749,7 @@ func (n *RuntimeLuaNakamaModule) authenticateFacebook(l *lua.LState) int {
 	return 3
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using a Facebook Instant Game.
 // @param playerInfo(string) Facebook Player info.
 // @param username(Opt string) The user's username. If left empty, one is generated.
@@ -1748,6 +1793,7 @@ func (n *RuntimeLuaNakamaModule) authenticateFacebookInstantGame(l *lua.LState) 
 	return 3
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using Apple Game Center credentials.
 // @param playerId(string) PlayerId provided by GameCenter.
 // @param bundleId(string) BundleId of your app on iTunesConnect.
@@ -1821,6 +1867,7 @@ func (n *RuntimeLuaNakamaModule) authenticateGameCenter(l *lua.LState) int {
 	return 3
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using a Google ID token.
 // @param token(string) Google OAuth access token.
 // @param username(Opt string) The user's username. If left empty, one is generated.
@@ -1864,6 +1911,7 @@ func (n *RuntimeLuaNakamaModule) authenticateGoogle(l *lua.LState) int {
 	return 3
 }
 
+// @group authenticate
 // @summary Authenticate user and create a session token using a Steam account token.
 // @param token(string) Steam token.
 // @param username(Opt string) The user's username. If left empty, one is generated.
@@ -1922,6 +1970,7 @@ func (n *RuntimeLuaNakamaModule) authenticateSteam(l *lua.LState) int {
 	return 3
 }
 
+// @group authenticate
 // @summary Generate a Nakama session token from a user ID.
 // @param userId(string) User ID to use to generate the token.
 // @param username(Opt string) The user's username. If left empty, one is generated.
@@ -1998,6 +2047,7 @@ func (n *RuntimeLuaNakamaModule) getLuaModule(l *lua.LState) string {
 	return strings.TrimPrefix(src[:len(src)-1], n.config.GetRuntime().Path)
 }
 
+// @group logger
 // @summary Write a DEBUG level message to the server logs.
 // @param message(string) The message to write to server logs with DEBUG level severity.
 // @param vars(vars) Variables to replace placeholders in message.
@@ -2028,6 +2078,7 @@ func (n *RuntimeLuaNakamaModule) loggerDebug(l *lua.LState) int {
 	return 1
 }
 
+// @group logger
 // @summary Write an INFO level message to the server logs.
 // @param message(string) The message to write to server logs with INFO level severity.
 // @param vars(vars) Variables to replace placeholders in message.
@@ -2058,6 +2109,7 @@ func (n *RuntimeLuaNakamaModule) loggerInfo(l *lua.LState) int {
 	return 1
 }
 
+// @group logger
 // @summary Write a WARN level message to the server logs.
 // @param message(string) The message to write to server logs with WARN level severity.
 // @param vars(vars) Variables to replace placeholders in message.
@@ -2088,6 +2140,7 @@ func (n *RuntimeLuaNakamaModule) loggerWarn(l *lua.LState) int {
 	return 1
 }
 
+// @group logger
 // @summary Write an ERROR level message to the server logs.
 // @param message(string) The message to write to server logs with ERROR level severity.
 // @param vars(vars) Variables to replace placeholders in message.
@@ -2118,6 +2171,7 @@ func (n *RuntimeLuaNakamaModule) loggerError(l *lua.LState) int {
 	return 1
 }
 
+// @group accounts
 // @summary Fetch account information by user ID.
 // @param userId(string) User ID to fetch information for. Must be valid UUID.
 // @return account(table) All account information including wallet, device IDs and more.
@@ -2222,6 +2276,7 @@ func (n *RuntimeLuaNakamaModule) accountGetId(l *lua.LState) int {
 	return 1
 }
 
+// @group accounts
 // @summary Fetch information for multiple accounts by user IDs.
 // @param userIds(table) Table of user IDs to fetch information for. Must be valid UUID.
 // @return account(Table) Table of accounts.
@@ -2354,6 +2409,7 @@ func (n *RuntimeLuaNakamaModule) accountsGetId(l *lua.LState) int {
 	return 1
 }
 
+// @group users
 // @summary Fetch one or more users by ID.
 // @param userIds(table) A Lua table of user IDs to fetch.
 // @return users(table) A table of user record objects.
@@ -2503,6 +2559,7 @@ func purchaseToLuaTable(l *lua.LState, p *api.ValidatedPurchase) *lua.LTable {
 	return validatedPurchaseTable
 }
 
+// @group users
 // @summary Fetch one or more users by username.
 // @param usernames(table) A table of usernames to fetch.
 // @return users(table) A table of user record objects.
@@ -2561,6 +2618,7 @@ func (n *RuntimeLuaNakamaModule) usersGetUsername(l *lua.LState) int {
 	return 1
 }
 
+// @group users
 // @summary Fetch one or more users randomly.
 // @param count(int) The number of users to fetch.
 // @return users(table) A list of user record objects.
@@ -2594,6 +2652,7 @@ func (n *RuntimeLuaNakamaModule) usersGetRandom(l *lua.LState) int {
 	return 1
 }
 
+// @group users
 // @summary Ban one or more users by ID.
 // @param userIds(table) A table of user IDs to ban.
 // @return error(error) An optional error value if an error occurred.
@@ -2642,6 +2701,7 @@ func (n *RuntimeLuaNakamaModule) usersBanId(l *lua.LState) int {
 	return 0
 }
 
+// @group users
 // @summary Unban one or more users by ID.
 // @param userIds(table) A table of user IDs to unban.
 // @return error(error) An optional error value if an error occurred.
@@ -2690,6 +2750,7 @@ func (n *RuntimeLuaNakamaModule) usersUnbanId(l *lua.LState) int {
 	return 0
 }
 
+// @group authenticate
 // @summary Link Apple authentication to a user ID.
 // @param userId(string) The user ID to be linked.
 // @param token(string) Apple sign in token.
@@ -2714,6 +2775,7 @@ func (n *RuntimeLuaNakamaModule) linkApple(l *lua.LState) int {
 	return 0
 }
 
+// @group authenticate
 // @summary Link custom authentication to a user ID.
 // @param userId(string) The user ID to be linked.
 // @param customId(string) Custom ID to be linked to the user.
@@ -2738,6 +2800,7 @@ func (n *RuntimeLuaNakamaModule) linkCustom(l *lua.LState) int {
 	return 0
 }
 
+// @group authenticate
 // @summary Link device authentication to a user ID.
 // @param userId(string) The user ID to be linked.
 // @param deviceId(string) Device ID to be linked to the user.
@@ -2762,6 +2825,7 @@ func (n *RuntimeLuaNakamaModule) linkDevice(l *lua.LState) int {
 	return 0
 }
 
+// @group authenticate
 // @summary Link email authentication to a user ID.
 // @param userId(string) The user ID to be linked.
 // @param email(string) Authentication email to be linked to the user.
@@ -2792,6 +2856,7 @@ func (n *RuntimeLuaNakamaModule) linkEmail(l *lua.LState) int {
 	return 0
 }
 
+// @group authenticate
 // @summary Link Facebook authentication to a user ID.
 // @param userId(string) The user ID to be linked.
 // @param username(string) If left empty, one is generated.
@@ -2824,6 +2889,7 @@ func (n *RuntimeLuaNakamaModule) linkFacebook(l *lua.LState) int {
 	return 0
 }
 
+// @group authenticate
 // @summary Link Facebook Instant Game authentication to a user ID.
 // @param userId(string) The user ID to be linked.
 // @param playerInfo(string) Facebook player info.
@@ -2848,6 +2914,7 @@ func (n *RuntimeLuaNakamaModule) linkFacebookInstantGame(l *lua.LState) int {
 	return 0
 }
 
+// @group authenticate
 // @summary Link Apple Game Center authentication to a user ID.
 // @param userId(string) The user ID to be linked.
 // @param playerId(string) Player ID provided by Game Center.
@@ -2902,6 +2969,7 @@ func (n *RuntimeLuaNakamaModule) linkGameCenter(l *lua.LState) int {
 	return 0
 }
 
+// @group authenticate
 // @summary Link Google authentication to a user ID.
 // @param userId(string) The user ID to be linked.
 // @param token(string) Google OAuth access token.
@@ -2926,6 +2994,7 @@ func (n *RuntimeLuaNakamaModule) linkGoogle(l *lua.LState) int {
 	return 0
 }
 
+// @group authenticate
 // @summary Link Steam authentication to a user ID.
 // @param userId(string) The user ID to be linked.
 // @param username(string) If left empty, one is generated.
@@ -2958,6 +3027,7 @@ func (n *RuntimeLuaNakamaModule) linkSteam(l *lua.LState) int {
 	return 0
 }
 
+// @group authenticate
 // @summary Unlink Apple authentication from a user ID.
 // @param userId(string) The user ID to be unlinked.
 // @param token(string) Apple sign in token.
@@ -2982,6 +3052,7 @@ func (n *RuntimeLuaNakamaModule) unlinkApple(l *lua.LState) int {
 	return 0
 }
 
+// @group authenticate
 // @summary Unlink custom authentication from a user ID.
 // @param userId(string) The user ID to be unlinked.
 // @param customId(string) Custom ID to be unlinked from the user.
@@ -3006,6 +3077,7 @@ func (n *RuntimeLuaNakamaModule) unlinkCustom(l *lua.LState) int {
 	return 0
 }
 
+// @group authenticate
 // @summary Unlink device authentication from a user ID.
 // @param userId(string) The user ID to be unlinked.
 // @param deviceId(string) Device ID to be unlinked to the user.
@@ -3030,6 +3102,7 @@ func (n *RuntimeLuaNakamaModule) unlinkDevice(l *lua.LState) int {
 	return 0
 }
 
+// @group authenticate
 // @summary Unlink email authentication from a user ID.
 // @param userId(string) The user ID to be unlinked.
 // @param email(string) Email to be unlinked from the user.
@@ -3054,6 +3127,7 @@ func (n *RuntimeLuaNakamaModule) unlinkEmail(l *lua.LState) int {
 	return 0
 }
 
+// @group authenticate
 // @summary Unlink Facebook authentication from a user ID.
 // @param userId(string) The user ID to be unlinked.
 // @param token(string) Facebook OAuth or Limited Login (JWT) access token.
@@ -3078,6 +3152,7 @@ func (n *RuntimeLuaNakamaModule) unlinkFacebook(l *lua.LState) int {
 	return 0
 }
 
+// @group authenticate
 // @summary Unlink Facebook Instant Game authentication from a user ID.
 // @param userId(string) The user ID to be unlinked.
 // @param playerInfo(string) Facebook player info.
@@ -3102,6 +3177,7 @@ func (n *RuntimeLuaNakamaModule) unlinkFacebookInstantGame(l *lua.LState) int {
 	return 0
 }
 
+// @group authenticate
 // @summary Unlink Apple Game Center authentication from a user ID.
 // @param userId(string) The user ID to be unlinked.
 // @param playerId(string) Player ID provided by Game Center.
@@ -3156,6 +3232,7 @@ func (n *RuntimeLuaNakamaModule) unlinkGameCenter(l *lua.LState) int {
 	return 0
 }
 
+// @group authenticate
 // @summary Unlink Google authentication from a user ID.
 // @param userId(string) The user ID to be unlinked.
 // @param token(string) Google OAuth access token.
@@ -3180,6 +3257,7 @@ func (n *RuntimeLuaNakamaModule) unlinkGoogle(l *lua.LState) int {
 	return 0
 }
 
+// @group authenticate
 // @summary Unlink Steam authentication from a user ID.
 // @param userId(string) The user ID to be unlinked.
 // @param token(string) Steam access token.
@@ -3204,6 +3282,7 @@ func (n *RuntimeLuaNakamaModule) unlinkSteam(l *lua.LState) int {
 	return 0
 }
 
+// @group streams
 // @summary List all users currently online and connected to a stream.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param streamIn(string) The primary stream subject, typically a user ID.
@@ -3290,6 +3369,7 @@ func (n *RuntimeLuaNakamaModule) streamUserList(l *lua.LState) int {
 	return 1
 }
 
+// @group streams
 // @summary Retreive a stream presence and metadata by user ID.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param streamIn(string) The primary stream subject, typically a user ID.
@@ -3398,6 +3478,7 @@ func (n *RuntimeLuaNakamaModule) streamUserGet(l *lua.LState) int {
 	return 1
 }
 
+// @group streams
 // @summary Add a user to a stream.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param streamIn(string) The primary stream subject, typically a user ID.
@@ -3520,6 +3601,7 @@ func (n *RuntimeLuaNakamaModule) streamUserJoin(l *lua.LState) int {
 	return 1
 }
 
+// @group streams
 // @summary Update a stream user by ID.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param streamIn(string) The primary stream subject, typically a user ID.
@@ -3639,6 +3721,7 @@ func (n *RuntimeLuaNakamaModule) streamUserUpdate(l *lua.LState) int {
 	return 0
 }
 
+// @group streams
 // @summary Remove a user from a stream.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param streamIn(string) The primary stream subject, typically a user ID.
@@ -3739,6 +3822,7 @@ func (n *RuntimeLuaNakamaModule) streamUserLeave(l *lua.LState) int {
 	return 0
 }
 
+// @group streams
 // @summary Kick user(s) from a stream.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param streamIn(string) The primary stream subject, typically a user ID.
@@ -3862,6 +3946,7 @@ func (n *RuntimeLuaNakamaModule) streamUserKick(l *lua.LState) int {
 	return 0
 }
 
+// @group streams
 // @summary Get a count of stream presences.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param streamIn(string) The primary stream subject, typically a user ID.
@@ -3936,6 +4021,7 @@ func (n *RuntimeLuaNakamaModule) streamCount(l *lua.LState) int {
 	return 1
 }
 
+// @group streams
 // @summary Close a stream and remove all presences on it.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param streamIn(string) The primary stream subject, typically a user ID.
@@ -4008,6 +4094,7 @@ func (n *RuntimeLuaNakamaModule) streamClose(l *lua.LState) int {
 	return 0
 }
 
+// @group streams
 // @summary Send data to presences on a stream.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param streamIn(string) The primary stream subject, typically a user ID.
@@ -4174,6 +4261,7 @@ func (n *RuntimeLuaNakamaModule) streamSend(l *lua.LState) int {
 	return 0
 }
 
+// @group streams
 // @summary Send a message to presences on a stream.
 // @param mode(uint8) The type of stream, 'chat' for example.
 // @param streamIn(string) The primary stream subject, typically a user ID.
@@ -4334,6 +4422,7 @@ func (n *RuntimeLuaNakamaModule) streamSendRaw(l *lua.LState) int {
 	return 0
 }
 
+// @group sessions
 // @summary Disconnect a session.
 // @param sessionId(string) The ID of the session to be disconnected.
 // @param reason([]runtime.PresenceReason) The reason for the session disconnect.
@@ -4367,6 +4456,7 @@ func (n *RuntimeLuaNakamaModule) sessionDisconnect(l *lua.LState) int {
 	return 0
 }
 
+// @group sessions
 // @summary Log out a user from their current session.
 // @param userId(string) The ID of the user to be logged out.
 // @param token(string) The current session authentication token.
@@ -4394,6 +4484,7 @@ func (n *RuntimeLuaNakamaModule) sessionLogout(l *lua.LState) int {
 	return 0
 }
 
+// @group matches
 // @summary Create a new authoritative realtime multiplayer match running on the given runtime module name. The given params are passed to the match's init hook.
 // @param module(string) The name of an available runtime module that will be responsible for the match. This was registered in InitModule.
 // @param params(Opt any) Any value to pass to the match init hook.
@@ -4428,6 +4519,7 @@ func (n *RuntimeLuaNakamaModule) matchCreate(l *lua.LState) int {
 	return 1
 }
 
+// @group matches
 // @summary Get information on a running match.
 // @param id(string) The ID of the match to fetch.
 // @return match(table) Information for the running match.
@@ -4471,6 +4563,7 @@ func (n *RuntimeLuaNakamaModule) matchGet(l *lua.LState) int {
 	return 1
 }
 
+// @group matches
 // @summary Allow the match handler to be sent a reservation signal to mark a user ID or session ID into the match state ahead of their join attempt and eventual join flow. Called when the match handler receives a runtime signal.
 // @param id(string) The user ID or session ID to send a reservation signal for.
 // @param data(Opt string) An arbitrary input supplied by the runtime caller of the signal.
@@ -4493,6 +4586,7 @@ func (n *RuntimeLuaNakamaModule) matchSignal(l *lua.LState) int {
 	return 1
 }
 
+// @group matches
 // @summary List currently running realtime multiplayer matches and optionally filter them by authoritative mode, label, and current participant count.
 // @param limit(Opt number) The maximum number of matches to list. Default 1.
 // @param authoritative(Opt bool) Set true to only return authoritative matches, false to only return relayed matches. Default false.
@@ -4588,6 +4682,7 @@ func (n *RuntimeLuaNakamaModule) matchList(l *lua.LState) int {
 	return 1
 }
 
+// @group notifications
 // @summary Send one in-app notification to a user.
 // @param userId(string) The user ID of the user to be sent the notification.
 // @param subject(string) Notification subject. Must be set.
@@ -4657,6 +4752,7 @@ func (n *RuntimeLuaNakamaModule) notificationSend(l *lua.LState) int {
 	return 0
 }
 
+// @group notifications
 // @summary Send one or more in-app notifications to a user.
 // @param notifications(table) A list of notifications to be sent together.
 // @return error(error) An optional error value if an error occurred.
@@ -4813,6 +4909,7 @@ func (n *RuntimeLuaNakamaModule) notificationsSend(l *lua.LState) int {
 	return 0
 }
 
+// @group wallets
 // @summary Update a user's wallet with the given changeset.
 // @param userId(string) The ID of the user whose wallet to update.
 // @param changeset(table) The set of wallet operations to apply.
@@ -4885,6 +4982,7 @@ func (n *RuntimeLuaNakamaModule) walletUpdate(l *lua.LState) int {
 	return 2
 }
 
+// @group wallets
 // @summary Update one or more user wallets with individual changesets. This function will also insert a new wallet ledger item into each user's wallet history that tracks their update.
 // @param updates(table) The set of user wallet update operations to apply.
 // @param updateLedger(Opt bool) Whether to record this update in the ledger. Defaults to false.
@@ -5018,6 +5116,7 @@ func (n *RuntimeLuaNakamaModule) walletsUpdate(l *lua.LState) int {
 	return 1
 }
 
+// @group wallets
 // @summary Update the metadata for a particular wallet update in a user's wallet ledger history. Useful when adding a note to a transaction for example.
 // @param itemId(string) The ID of the wallet ledger item to update.
 // @param metadata(table) The new metadata to set on the wallet ledger item.
@@ -5070,6 +5169,7 @@ func (n *RuntimeLuaNakamaModule) walletLedgerUpdate(l *lua.LState) int {
 	return 1
 }
 
+// @group wallets
 // @summary List all wallet updates for a particular user from oldest to newest.
 // @param userId(string) The ID of the user to list wallet updates for.
 // @param limit(Opt number) Limit number of results. Defaults to 100.
@@ -5129,6 +5229,7 @@ func (n *RuntimeLuaNakamaModule) walletLedgerList(l *lua.LState) int {
 	return 2
 }
 
+// @group storage
 // @summary List records in a collection and page through results. The records returned can be filtered to those owned by the user or "" for public records.
 // @param userId(string) User ID to list records for or "" (empty string) for public records.
 // @param collection(string) Collection to list data from.
@@ -5197,6 +5298,7 @@ func (n *RuntimeLuaNakamaModule) storageList(l *lua.LState) int {
 	return 2
 }
 
+// @group storage
 // @summary Fetch one or more records by their bucket/collection/keyname and optional user.
 // @param objectIds(table) A table of object identifiers to be fetched.
 // @return objects(table) A list of matches matching the parameters criteria.
@@ -5337,6 +5439,7 @@ func (n *RuntimeLuaNakamaModule) storageRead(l *lua.LState) int {
 	return 1
 }
 
+// @group storage
 // @summary Write one or more objects by their collection/keyname and optional user.
 // @param objectIds(table) A table of object identifiers to be written.
 // @return acks(table) A list of acks with the version of the written objects.
@@ -5515,6 +5618,7 @@ func (n *RuntimeLuaNakamaModule) storageWrite(l *lua.LState) int {
 	return 1
 }
 
+// @group storage
 // @summary Remove one or more objects by their collection/keyname and optional user.
 // @param objectIds(table) A list of object identifiers to be deleted.
 // @return error(error) An optional error value if an error occurred.
@@ -6044,6 +6148,7 @@ func (n *RuntimeLuaNakamaModule) multiUpdate(l *lua.LState) int {
 	return 2
 }
 
+// @group leaderboards
 // @summary Setup a new dynamic leaderboard with the specified ID and various configuration settings. The leaderboard will be created if it doesn't already exist, otherwise its configuration will not be updated.
 // @param id(string) The unique identifier for the new leaderboard. This is used by clients to submit scores.
 // @param authoritative(bool) Mark the leaderboard as authoritative which ensures updates can only be made via the Go runtime. No client can submit a score directly. Default false.
@@ -6117,6 +6222,7 @@ func (n *RuntimeLuaNakamaModule) leaderboardCreate(l *lua.LState) int {
 	return 0
 }
 
+// @group leaderboards
 // @summary Delete a leaderboard and all scores that belong to it.
 // @param id(string) The unique identifier for the leaderboard to delete.
 // @return error(error) An optional error value if an error occurred.
@@ -6135,6 +6241,7 @@ func (n *RuntimeLuaNakamaModule) leaderboardDelete(l *lua.LState) int {
 	return 0
 }
 
+// @group leaderboards
 // @summary Find leaderboards which have been created on the server. Leaderboards can be filtered with categories.
 // @param categoryStart(number) Filter leaderboards with categories greater or equal than this value.
 // @param categoryEnd(number) Filter leaderboards with categories equal or less than this value.
@@ -6204,6 +6311,7 @@ func (n *RuntimeLuaNakamaModule) leaderboardList(l *lua.LState) int {
 	return 2
 }
 
+// @group leaderboards
 // @summary List records on the specified leaderboard, optionally filtering to only a subset of records by their owners. Records will be listed in the preconfigured leaderboard sort order.
 // @param id(string) The unique identifier for the leaderboard to list. Mandatory field.
 // @param owners(Opt table) List of owners to filter to.
@@ -6277,6 +6385,7 @@ func (n *RuntimeLuaNakamaModule) leaderboardRecordsList(l *lua.LState) int {
 	return leaderboardRecordsToLua(l, records.Records, records.OwnerRecords, records.PrevCursor, records.NextCursor)
 }
 
+// @group leaderboards
 // @summary Use the preconfigured operator for the given leaderboard to submit a score for a particular user.
 // @param id(string) The unique identifier for the leaderboard to submit to.
 // @param owner(string) The owner of this score submission. Mandatory field.
@@ -6359,6 +6468,7 @@ func (n *RuntimeLuaNakamaModule) leaderboardRecordWrite(l *lua.LState) int {
 	return 1
 }
 
+// @group leaderboards
 // @summary Remove an owner's record from a leaderboard, if one exists.
 // @param id(string) The unique identifier for the leaderboard to delete from.
 // @param owner(string) The owner of the score to delete. Mandatory field.
@@ -6382,6 +6492,7 @@ func (n *RuntimeLuaNakamaModule) leaderboardRecordDelete(l *lua.LState) int {
 	return 0
 }
 
+// @group leaderboards
 // @summary Fetch one or more leaderboards by ID.
 // @param ids(table) The table array of leaderboard ids.
 // @return leaderboards(table) The leaderboard records according to ID.
@@ -6459,6 +6570,7 @@ func leaderboardToLuaTable(l *lua.LState, leaderboard *api.Leaderboard) (*lua.LT
 	return lt, nil
 }
 
+// @group purchases
 // @summary Validates and stores the purchases present in an Apple App Store Receipt.
 // @param userId(string) The user ID of the owner of the receipt.
 // @param receipt(string) Base-64 encoded receipt data returned by the purchase operation itself.
@@ -6499,6 +6611,7 @@ func (n *RuntimeLuaNakamaModule) purchaseValidateApple(l *lua.LState) int {
 	return 1
 }
 
+// @group purchases
 // @summary Validates and stores a purchase receipt from the Google Play Store.
 // @param userId(string) The user ID of the owner of the receipt.
 // @param receipt(string) JSON encoded Google receipt.
@@ -6537,6 +6650,7 @@ func (n *RuntimeLuaNakamaModule) purchaseValidateGoogle(l *lua.LState) int {
 	return 1
 }
 
+// @group purchases
 // @summary Validates and stores a purchase receipt from the Huawei App Gallery.
 // @param userId(string) The user ID of the owner of the receipt.
 // @param receipt(string) The Huawei receipt data.
@@ -6584,6 +6698,7 @@ func (n *RuntimeLuaNakamaModule) purchaseValidateHuawei(l *lua.LState) int {
 	return 1
 }
 
+// @group purchases
 // @summary Look up a purchase receipt by transaction ID.
 // @param transactionId(string) Transaction ID of the purchase to look up.
 // @return owner(string) The owner of the purchase.
@@ -6607,6 +6722,7 @@ func (n *RuntimeLuaNakamaModule) purchaseGetByTransactionId(l *lua.LState) int {
 	return 2
 }
 
+// @group purchases
 // @summary List stored validated purchase receipts.
 // @param userId(Opt string) Filter by user ID. Can be an empty string to list purchases for all users.
 // @param limit(number) Limit number of records retrieved. Defaults to 100.
@@ -6652,6 +6768,7 @@ func (n *RuntimeLuaNakamaModule) purchasesList(l *lua.LState) int {
 	return 2
 }
 
+// @group tournaments
 // @summary Setup a new dynamic tournament with the specified ID and various configuration settings. The underlying leaderboard will be created if it doesn't already exist, otherwise its configuration will not be updated.
 // @param id(string) The unique identifier for the new tournament. This is used by clients to submit scores.
 // @param authoritative(bool) Whether the tournament created is server authoritative. Default true.
@@ -6767,6 +6884,7 @@ func (n *RuntimeLuaNakamaModule) tournamentCreate(l *lua.LState) int {
 	return 0
 }
 
+// @group tournaments
 // @summary Delete a tournament and all records that belong to it.
 // @param id(string) The unique identifier for the tournament to delete.
 // @return error(error) An optional error value if an error occurred.
@@ -6783,6 +6901,7 @@ func (n *RuntimeLuaNakamaModule) tournamentDelete(l *lua.LState) int {
 	return 0
 }
 
+// @group tournaments
 // @summary Add additional score attempts to the owner's tournament record. This overrides the max number of score attempts allowed in the tournament for this specific owner.
 // @param id(string) The unique identifier for the tournament to update.
 // @param owner(string) The owner of the records to increment the count for.
@@ -6816,6 +6935,7 @@ func (n *RuntimeLuaNakamaModule) tournamentAddAttempt(l *lua.LState) int {
 	return 0
 }
 
+// @group tournaments
 // @summary A tournament may need to be joined before the owner can submit scores. This operation is idempotent and will always succeed for the owner even if they have already joined the tournament.
 // @param id(string) The unique identifier for the tournament to join.
 // @param userId(string) The owner of the record.
@@ -6849,6 +6969,7 @@ func (n *RuntimeLuaNakamaModule) tournamentJoin(l *lua.LState) int {
 	return 0
 }
 
+// @group tournaments
 // @summary Fetch one or more tournaments by ID.
 // @param ids(table) The table of tournament ids.
 // @return tournamentIDs(table) List of tournament records.
@@ -6951,6 +7072,7 @@ func tournamentToLuaTable(l *lua.LState, tournament *api.Tournament) (*lua.LTabl
 	return tt, err
 }
 
+// @group tournaments
 // @summary List records on the specified tournament, optionally filtering to only a subset of records by their owners. Records will be listed in the preconfigured tournament sort order.
 // @param tournamentId(string) The ID of the tournament to list records for.
 // @param ownerIds(Opt table) List of owner IDs to filter results by. Optional.
@@ -7099,6 +7221,7 @@ func recordToLuaTable(l *lua.LState, record *api.LeaderboardRecord) (*lua.LTable
 	return recordTable, nil
 }
 
+// @group tournaments
 // @summary Find tournaments which have been created on the server. Tournaments can be filtered with categories and via start and end times.
 // @param categoryStart(number) Filter tournament with categories greater or equal than this value.
 // @param categoryEnd(number) Filter tournament with categories equal or less than this value.
@@ -7186,6 +7309,7 @@ func (n *RuntimeLuaNakamaModule) tournamentList(l *lua.LState) int {
 	return 2
 }
 
+// @group tournaments
 // @summary Submit a score and optional subscore to a tournament leaderboard. If the tournament has been configured with join required this will fail unless the owner has already joined the tournament.
 // @param id(string) The unique identifier for the tournament leaderboard to submit to.
 // @param owner(string) The owner of this score submission. Mandatory field.
@@ -7249,6 +7373,7 @@ func (n *RuntimeLuaNakamaModule) tournamentRecordWrite(l *lua.LState) int {
 	return 1
 }
 
+// @group tournaments
 // @summary Fetch the list of tournament records around the owner.
 // @param id(string) The ID of the tournament to list records for.
 // @param ownerId(string) The owner ID around which to show records.
@@ -7302,6 +7427,7 @@ func (n *RuntimeLuaNakamaModule) tournamentRecordsHaystack(l *lua.LState) int {
 	return 1
 }
 
+// @group groups
 // @summary Fetch one or more groups by their ID.
 // @param groupIds(table) A list of strings of the IDs for the groups to get.
 // @return getGroups(table) A table of groups with their fields.
@@ -7379,6 +7505,7 @@ func (n *RuntimeLuaNakamaModule) groupsGetId(l *lua.LState) int {
 	return 1
 }
 
+// @group groups
 // @summary Setup a group with various configuration settings. The group will be created if they don't exist or fail if the group name is taken.
 // @param userId(string) Mandatory. The user ID to be associated as the group superadmin.
 // @param name(string) Mandatory. Group name, must be unique.
@@ -7468,6 +7595,7 @@ func (n *RuntimeLuaNakamaModule) groupCreate(l *lua.LState) int {
 	return 1
 }
 
+// @group groups
 // @summary Update a group with various configuration settings. The group which is updated can change some or all of its fields.
 // @param groupId(string) The ID of the group to update.
 // @param userId(string) User ID calling the update operation for permission checking. Set as nil to enact the changes as the system user.
@@ -7560,6 +7688,7 @@ func (n *RuntimeLuaNakamaModule) groupUpdate(l *lua.LState) int {
 	return 0
 }
 
+// @group groups
 // @summary Delete a group.
 // @param groupId(string) The ID of the group to delete.
 // @return error(error) An optional error value if an error occurred.
@@ -7578,6 +7707,7 @@ func (n *RuntimeLuaNakamaModule) groupDelete(l *lua.LState) int {
 	return 0
 }
 
+// @group groups
 // @summary Join a group for a particular user.
 // @param groupId(string) The ID of the group to join.
 // @param userId(string) The user ID to add to this group.
@@ -7609,6 +7739,7 @@ func (n *RuntimeLuaNakamaModule) groupUserJoin(l *lua.LState) int {
 	return 0
 }
 
+// @group groups
 // @summary Leave a group for a particular user.
 // @param groupId(string) The ID of the group to leave.
 // @param userId(string) The user ID to remove from this group.
@@ -7639,6 +7770,7 @@ func (n *RuntimeLuaNakamaModule) groupUserLeave(l *lua.LState) int {
 	return 0
 }
 
+// @group groups
 // @summary Add users to a group.
 // @param groupId(string) The ID of the group to add users to.
 // @param userIds(table) Table of user IDs to add to this group.
@@ -7701,6 +7833,7 @@ func (n *RuntimeLuaNakamaModule) groupUsersAdd(l *lua.LState) int {
 	return 0
 }
 
+// @group groups
 // @summary Promote users in a group.
 // @param groupId(string) The ID of the group whose members are being promoted.
 // @param userIds(table) Table of user IDs to promote.
@@ -7763,6 +7896,7 @@ func (n *RuntimeLuaNakamaModule) groupUsersPromote(l *lua.LState) int {
 	return 0
 }
 
+// @group groups
 // @summary Demote users in a group.
 // @param groupId(string) The ID of the group whose members are being demoted.
 // @param userIds(table) Table of user IDs to demote.
@@ -7825,6 +7959,7 @@ func (n *RuntimeLuaNakamaModule) groupUsersDemote(l *lua.LState) int {
 	return 0
 }
 
+// @group groups
 // @summary Kick users from a group.
 // @param groupId(string) The ID of the group to kick users from.
 // @param userIds(table) Table of user IDs to kick.
@@ -7887,6 +8022,7 @@ func (n *RuntimeLuaNakamaModule) groupUsersKick(l *lua.LState) int {
 	return 0
 }
 
+// @group groups
 // @summary Find groups based on the entered criteria.
 // @param name(string) Search for groups that contain this value in their name.
 // @param langTag(Opt string) Filter based upon the entered language tag.
@@ -7960,6 +8096,7 @@ func (n *RuntimeLuaNakamaModule) groupsList(l *lua.LState) int {
 	return 2
 }
 
+// @group groups
 // @summary List all members, admins and superadmins which belong to a group. This also list incoming join requests.
 // @param groupId(string) The ID of the group to list members for.
 // @return groupUsers(table) The user information for members, admins and superadmins for the group. Also users who sent a join request.
@@ -8055,6 +8192,7 @@ func (n *RuntimeLuaNakamaModule) groupUsersList(l *lua.LState) int {
 	return 2
 }
 
+// @group groups
 // @summary List all groups which a user belongs to and whether they've been accepted or if it's an invite.
 // @param userId(string) The ID of the user to list groups for.
 // @return userGroups(table) A table of groups with their fields.
@@ -8133,6 +8271,7 @@ func (n *RuntimeLuaNakamaModule) userGroupsList(l *lua.LState) int {
 	return 2
 }
 
+// @group accounts
 // @summary Update an account by user ID.
 // @param userId(Opt string) User ID for which the information is to be updated. Must be valid UUID.
 // @param metadata(Opt table) The metadata to update for this account.
@@ -8210,6 +8349,7 @@ func (n *RuntimeLuaNakamaModule) accountUpdateId(l *lua.LState) int {
 	return 0
 }
 
+// @group accounts
 // @summary Delete an account by user ID.
 // @param userId(string) User ID for the account to be deleted. Must be valid UUID.
 // @param recorded(bool) Whether to record this deletion in the database. By default this is set to false.
@@ -8230,6 +8370,7 @@ func (n *RuntimeLuaNakamaModule) accountDeleteId(l *lua.LState) int {
 	return 0
 }
 
+// @group accounts
 // @summary Export account information for a specified user ID.
 // @param userId(string) User ID for the account to be exported. Must be valid UUID.
 // @return export(string) Account information for the provided user ID, in JSON format.
@@ -8257,6 +8398,7 @@ func (n *RuntimeLuaNakamaModule) accountExportId(l *lua.LState) int {
 	return 1
 }
 
+// @group friends
 // @summary List all friends, invites, invited, and blocked which belong to a user.
 // @param userId(string) The ID of the user who's friends, invites, invited, and blocked you want to list.
 // @param limit(Opt number) The number of friends to retrieve in this page of results. No more than 100 limit allowed per result.
@@ -8323,6 +8465,7 @@ func (n *RuntimeLuaNakamaModule) friendsList(l *lua.LState) int {
 	return 2
 }
 
+// @group utils
 // @summary Read file from user device.
 // @param relPath(string) Relative path to the file to be read.
 // @return fileContent(string) The read file contents.
@@ -8353,6 +8496,7 @@ func (n *RuntimeLuaNakamaModule) fileRead(l *lua.LState) int {
 	return 1
 }
 
+// @group chat
 // @summary Send a message on a realtime chat channel.
 // @param channelId(string) The ID of the channel to send the message on.
 // @param content(table) Message content. Must be set.
@@ -8416,6 +8560,7 @@ func (n *RuntimeLuaNakamaModule) channelMessageSend(l *lua.LState) int {
 	return 1
 }
 
+// @group chat
 // @summary Update a message on a realtime chat channel.
 // @param channelId(string) The ID of the channel to send the message on.
 // @param messageId(string) The ID of the message to update.
@@ -8482,6 +8627,7 @@ func (n *RuntimeLuaNakamaModule) channelMessageUpdate(l *lua.LState) int {
 	return 1
 }
 
+// @group chat
 // @summary Create a channel identifier to be used in other runtime calls. Does not create a channel.
 // @param target(string) Can be the room name, group identifier, or another username.
 // @param chanType(int) The type of channel, for example group or direct.
