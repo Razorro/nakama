@@ -1301,7 +1301,7 @@ func (n *RuntimeGoNakamaModule) StreamClose(mode uint8, subject, subcontext, lab
 // @param subcontext(type=string, optional=true) A secondary subject, for example for direct chat between two users.
 // @param label(type=string) Meta-information about the stream, for example a chat room name.
 // @param data(type=string) The data to send.
-// @param presences(type=[]runtime.Presence) Array of presences to receive the sent data. If not set, will be sent to all presences.
+// @param presences(type=[]runtime.Presence, optional=true) Array of presences to receive the sent data. If not set, will be sent to all presences.
 // @param reliable(type=bool, optional=true) Whether the sender has been validated prior.
 // @return error(error) An optional error value if an error occurred.
 func (n *RuntimeGoNakamaModule) StreamSend(mode uint8, subject, subcontext, label, data string, presences []runtime.Presence, reliable bool) error {
@@ -1468,7 +1468,7 @@ func (n *RuntimeGoNakamaModule) SessionLogout(userID, token, refreshToken string
 // @summary Create a new authoritative realtime multiplayer match running on the given runtime module name. The given params are passed to the match's init hook.
 // @param ctx(type=context.Context) The context object represents information about the server and requester.
 // @param module(type=string) The name of an available runtime module that will be responsible for the match. This was registered in InitModule.
-// @param params(type=map[string]interface{}) Any value to pass to the match init hook.
+// @param params(type=map[string]interface{}, optional=true) Any value to pass to the match init hook.
 // @return matchId(string) The match ID of the newly created match. Clients can immediately use this ID to join the match.
 // @return error(error) An optional error value if an error occurred.
 func (n *RuntimeGoNakamaModule) MatchCreate(ctx context.Context, module string, params map[string]interface{}) (string, error) {
