@@ -366,6 +366,9 @@ func (s *ConsoleServer) WriteStorageObject(ctx context.Context, in *console.Writ
 	return acks.Acks[0], nil
 }
 
+// Select count(*) can be rather slow, if you don't need an exact count, the current statistic from the catalog table
+// `pg_class` might be good enough and much faster to retrieve for big tables.
+// Notice the result is an approximate number.
 func countDatabase(ctx context.Context, logger *zap.Logger, db *sql.DB, tableName string) int32 {
 	var count sql.NullInt64
 	// First try a fast count on table metadata.

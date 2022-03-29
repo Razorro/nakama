@@ -31,7 +31,7 @@ import (
 )
 
 var (
-	invalidUsernameRegex = regexp.MustCompilePOSIX("([[:cntrl:]]|[[\t\n\r\f\v]])+")
+	invalidUsernameRegex = regexp.MustCompilePOSIX("([[:cntrl:]]|[[\t\n\r\f\v]])+") // How!! Such detailed logic, for me, I may highly possible ignore it.
 	invalidCharsRegex    = regexp.MustCompilePOSIX("([[:cntrl:]]|[[:space:]])+")
 	emailRegex           = regexp.MustCompile("^.+@.+\\..+$")
 )
